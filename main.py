@@ -2,6 +2,7 @@ from support import QR, Scrolling, UI_Elements
 import pygame as pg
 import math
 from datetime import date
+import os
 import configparser
 
 
@@ -82,7 +83,7 @@ UI_Elements.init()
 
 # load settings from config file
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read(os.path.basename(__file__)[0:-3] + '_config.ini')
 
 matches = list(eval(config['Matches']['match_list'])) if config['Matches']['match_list'] != '' else None
 

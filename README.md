@@ -12,7 +12,7 @@ Running the scouting app requires the modules pygame, qrcode, and Pillow to be i
 When these modules are installed, clone this repository and run "main.py". Every time a QR Code is generated, it will be saved to the "QR Codes" folder with the date, match number, and team number selected.
 
 ## Settings
-The settings are stored in the "config.ini" file. It looks like this inside:
+The settings are stored in the "main_config.ini" file. It looks like this inside:
 ```
 [Matches]
 # list of event matches
@@ -56,6 +56,7 @@ save_path = QR Codes
 ```
 To change any values, open the file in a text editor and replace the default values with the new ones you want.
 
+To have multiple scouting apps (for example, pit scouting and match scouting), make a copy of "main.py" and name it soemthing else. Then, copy the "main_config.ini" file and rename it to "filename_config.ini". For example, the config file for "pit_scouting.py" would be "pit_scouting_config.ini".
 ## Auto Team Number Selection
 The team numbers for the event matches can be set manually or automatically. To set them manually, open the config file and change "match_list".
 ### Manually

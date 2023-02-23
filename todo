@@ -1,0 +1,25 @@
+# Pit scouting information
+* Team number
+* Drivetrain type
+* Can it score cubes and cones
+* What levels can it score on
+* Can it balance on the charging station
+   * Can it fit with two other robots
+* What does it do in auton
+* How does it score
+* Comments
+# Match scouting information - separate for auton and teleop
+* Can they score
+* How many cones/cubes were scored
+* Did they end on the charging station
+   * Docked and engaged or docked and not engaged
+* What levels did they score on
+* Defense
+* Any penalties
+* Did they win
+* Comments
+# Match scouting - auton
+* Team number
+* Did they leave their community
+# Match scouting - teleop
+* Any links scored
