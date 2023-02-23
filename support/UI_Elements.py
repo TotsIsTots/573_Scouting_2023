@@ -53,7 +53,11 @@ class Header:
 class Counter:
     counter_list = []
 
-    def __init__(self, x: float, y: float, size: int, value: int = 0, title: str = "", title_size: int = 14):
+    def __init__(self, x: float, y: float, size: int, value: int = 0, title: str = "", title_size: int = 14, title_placement: str = "u"):
+        assert title_placement in [
+            'u',  'r'], 'title_placement parameter must be u or r'
+        self.title_placement = title_placement
+        
         # defines title values
         self.title = title
         if title != "":
@@ -61,8 +65,13 @@ class Counter:
             self.title_font_color = (16, 16, 16)
             self.title_render = self.title_font.render(
                 str(title), 1, self.title_font_color)
-            self.title_render_x, self.title_render_y = x, y - \
-                self.title_render.get_height() - (size * 0.05)
+            if self.title_placement == 'u':
+                self.title_render_x, self.title_render_y = x, y - \
+                    self.title_render.get_height() - (size * 0.05)
+            elif self.title_placement == 'r':
+                self.title_render_x, self.title_render_y = x + \
+                    self.title_render.get_width(), y
+                
 
         # defines counter values
         self.font = pg.font.SysFont('arial', size)
@@ -79,7 +88,7 @@ class Counter:
         self.plus = pg.transform.smoothscale(pg.image.load(
             os.path.join('Assets', 'Plus.png')), (size, size))
         self.plus_rect = pg.Rect(
-            x + (size * 1.2) + self.value_render.get_width(), y, size, size)
+            x + size + self.value_render.get_width(), y, size, size)
 
         # defines counter dimensions
         self.x, self.y = x, y
@@ -116,8 +125,13 @@ class Counter:
             if counter.title != "":
                 counter.title_render = counter.title_font.render(
                     str(counter.title), 1, counter.title_font_color)
-                counter.title_render_x, counter.title_render_y = counter.x, counter.y - \
-                    counter.title_render.get_height() - (counter.size * 0.05)
+                if counter.title_placement == 'u':
+                    counter.title_render_x, counter.title_render_y = counter.x, counter.y - \
+                        counter.title_render.get_height() - (counter.size * 0.05)
+                elif counter.title_placement == 'r':
+                    counter.title_render_x, counter.title_render_y = counter.x + \
+                        counter.width, counter.y + \
+                    (counter.height * 0.2)
 
             # renders value
             counter.value_render = counter.font.render(
@@ -138,6 +152,7 @@ class Dropdown:
     dropdown_list = []
 
     def __init__(self, x: float, y: float, width: float, height: float, options: list, title: str = "", title_size: int = 14):
+        
         # define dimensions
         self.x, self.y = x, y
         self.width, self.height = width, height

@@ -1,0 +1,244 @@
+from support import QR, Scrolling, UI_Elements
+import pygame as pg
+import math
+from datetime import date
+import os
+import configparser
+
+
+def main():
+    # it is HIGHLY reccomended that these exist, but you can change parameters such as size, position etc.
+    global match_number, team_color, team_number
+    match_number = UI_Elements.Counter(
+        20, 80, 48, 1, "Match number", 24)
+    
+    team_color = UI_Elements.TeamColorToggle(200, 85, 'Color', 32)
+    
+    if matches:
+        team_number = UI_Elements.Dropdown(
+            350, 80, 100, 40, matches[match_number.value - 1]['red'], "Team number", 24)
+    else:
+        team_number = UI_Elements.TextField(
+            350, 80, 60, 38, 24, title='Team Number', title_size=24)
+
+    # Initialize data input objects and headers here, QR code lists data in order of initialization
+    prematch_header = UI_Elements.Header(32, 'Prematch', 24)
+    
+    
+    auton_header = UI_Elements.Header(270, 'Autonomous', 24)
+    
+    a_level_1 = UI_Elements.Counter(20, 300, 48, 0, 'Score Level 1', 24, 'r')
+    a_level_2 = UI_Elements.Counter(20, 350, 48, 0, 'Score Level 2', 24, 'r')
+    a_level_3 = UI_Elements.Counter(20, 400, 48, 0, 'Score Level 3', 24, 'r')
+    
+    community_checkbox = UI_Elements.Checkmark(320, 305, 'Leave community?', 32)
+    
+    
+    teleop_header = UI_Elements.Header(500, 'Teleop', 24)
+    
+    t_level_1 = UI_Elements.Counter(20, 530, 48, 0, 'Score Level 1', 24, 'r')
+    t_level_2 = UI_Elements.Counter(20, 580, 48, 0, 'Score Level 2', 24, 'r')
+    t_level_3 = UI_Elements.Counter(20, 630, 48, 0, 'Score Level 3', 24, 'r')
+    
+    links_scored = UI_Elements.Counter(320, 550, 48, 0, 'Links Scored', 24)
+    
+    
+    endgame_header = UI_Elements.Header(730, 'Endgame', 24)
+    
+    docked = UI_Elements.Checkmark(20, 760, 'Docked on Charging Station?', 32)
+    engaged = UI_Elements.Checkmark(20, 810, 'Charging station engaged?', 32)
+    
+    breakdown = UI_Elements.Checkmark(450, 760, 'Robot Breakdown?', 32)
+    
+    win = UI_Elements.Checkmark(450, 810, 'Win?', 32)
+    
+    defense = UI_Elements.Dropdown(20, 900, 100, 40, ['None', 'Low', 'High'], 'Defense', 24)
+    
+    penalties = UI_Elements.Checkmark(150, 900, 'Penalties?', 32)
+    
+    comments = UI_Elements.TextField(350, 900, 400, 300, 24, title='Comments', title_size=24)
+    
+    #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
+    #!!!===                 It is not reccomended to change anything below this line.                       ===!!!
+
+    # main loop
+    run = True
+    while run:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                run = False
+
+            # handles input for UI elements
+            UI_Elements.TextField.handleInput(event)
+            UI_Elements.Dropdown.handleInput(event)
+            UI_Elements.Checkmark.handleInput(event)
+            UI_Elements.Counter.handleInput(event)
+            team_color.handleInput(event)
+
+            # Generate and Reset buttons
+            handleActionInputs(event)
+
+            # handles scrolling from scroll offset
+            handleScrolling(Scrolling.get_change(event))
+
+        screen_w, screen_h = pg.display.get_surface().get_size()
+
+        # updates UI elements
+        UI_Elements.Header.update()
+        UI_Elements.Counter.update()
+        UI_Elements.Dropdown.update()
+        UI_Elements.Checkmark.update()
+        UI_Elements.TextField.update()
+        team_color.update()
+        
+        if matches:
+            team_number.options = matches[match_number.value - 1][team_color.value]
+
+        drawDisplay(screen_w, screen_h)
+
+
+pg.font.init()
+
+WIN = pg.display.set_mode((800, 450))
+
+# initialize other scripts
+Scrolling.init()
+UI_Elements.init()
+
+# load settings from config file
+config = configparser.ConfigParser()
+config.read(os.path.basename(__file__)[0:-3] + '_config.ini')
+
+matches = list(eval(config['Matches']['match_list'])) if config['Matches']['match_list'] != '' else None
+
+Scrolling.scroll_speed = int(config['Scrolling']['scroll_speed'])
+Scrolling.display_height = int(config['Scrolling']['display_height'])
+
+screen_w = int(config['Window']['screen_w'])
+screen_h = int(config['Window']['screen_h'])
+window_caption = config['Window']['window_caption']
+window_icon_path = config['Window']['window_icon_path']
+background_path = config['Window']['background_path']
+
+action_buttons_pos = tuple(
+    map(int, config['ActionButtons']['action_buttons_pos'].split(',')))
+action_buttons_size = int(config['ActionButtons']['action_buttons_size'])
+generate_button_color = tuple(
+    map(int, config['ActionButtons']['generate_button_color'].split(',')))
+generate_text_color = tuple(
+    map(int, config['ActionButtons']['generate_text_color'].split(',')))
+reset_button_color = tuple(
+    map(int, config['ActionButtons']['reset_button_color'].split(',')))
+reset_text_color = tuple(
+    map(int, config['ActionButtons']['reset_text_color'].split(',')))
+
+QR_display_size = int(config['QRCodes']['display_size'])
+QR_save_path = config['QRCodes']['save_path']
+
+WIN = pg.display.set_mode((screen_w, screen_h), pg.RESIZABLE)
+pg.display.set_caption(window_caption)
+icon = pg.image.load(window_icon_path)
+pg.display.set_icon(icon)
+BACKGROUND = pg.image.load(background_path)
+BACKGROUND_W, BACKGROUND_H = BACKGROUND.get_size()
+
+action_font = pg.font.SysFont('arial', action_buttons_size)
+generate_render = action_font.render('Generate', 1, generate_text_color)
+generate_rect = pg.Rect(
+    action_buttons_pos[0], action_buttons_pos[1], generate_render.get_width() * 1.1, action_buttons_size)
+reset_render = action_font.render('Reset', 1, reset_text_color)
+reset_rect = pg.Rect(
+    action_buttons_pos[0] + generate_render.get_width() * 1.2, action_buttons_pos[1], reset_render.get_width() * 1.1, action_buttons_size)
+
+
+def compileData(seperator: str = ',') -> str:
+    data = ''
+    for element in UI_Elements.list:
+        if type(element).__name__ == "Counter" or type(element).__name__ == "Checkmark" or type(element).__name__ == "TeamColorToggle":
+            data += str(element.value) + seperator
+        if type(element).__name__ == "Dropdown":
+            data += element.selected_str + seperator
+        if type(element).__name__ == "TextField":
+            data += element.get_string() + seperator
+    return data[:len(data) - len(seperator)]
+
+
+def reset():
+    for element in UI_Elements.list:
+        if type(element).__name__ == "Counter":
+            if element != match_number:
+                element.value = 0
+        if type(element).__name__ == "Checkmark":
+            element.value = False
+        if type(element).__name__ == "Dropdown":
+            element.selected_num = -1
+        if type(element).__name__ == "TextField":
+            element.content = ['']
+
+
+def handleScrolling(scroll_change):
+    for header in UI_Elements.Header.header_list:
+        header.y -= scroll_change
+    for counter in UI_Elements.Counter.counter_list:
+        counter.y -= scroll_change
+    for checkmark in UI_Elements.Checkmark.checkmark_list:
+        checkmark.y -= scroll_change
+    for dropdown in UI_Elements.Dropdown.dropdown_list:
+        dropdown.y -= scroll_change
+    for textField in UI_Elements.TextField.textField_list:
+        textField.y -= scroll_change
+    team_color.y -= scroll_change
+
+    generate_rect.y -= scroll_change
+    reset_rect.y -= scroll_change
+
+
+def handleActionInputs(event):
+    if event.type == pg.MOUSEBUTTONDOWN and pg.mouse.get_pressed()[0]:
+        mouse_pos = pg.mouse.get_pos()
+        if generate_rect.collidepoint(mouse_pos):
+            QR.saveAndShow(str(date.today()) + '_Match_' + str(match_number.value) +
+                           '_Team_' + (team_number.selected_str if matches else team_number.content[0]), compileData(), QR_display_size, (screen_w, screen_h), QR_save_path)
+            match_number.value += 1
+        if reset_rect.collidepoint(mouse_pos):
+            reset()
+
+
+def drawBackground(screen_w, screen_h):
+    for x in range(math.floor(screen_w / BACKGROUND_W) + 1):
+        for y in range(math.floor(screen_h / BACKGROUND_H) + 1):
+            WIN.blit(BACKGROUND, (x * BACKGROUND_W, y * BACKGROUND_H))
+
+
+def drawDisplay(screen_w, screen_h):
+    drawBackground(screen_w, screen_h)
+
+    for counter in UI_Elements.Counter.counter_list:
+        counter.draw()
+    for checkmark in UI_Elements.Checkmark.checkmark_list:
+        checkmark.draw()
+    for dropdown in UI_Elements.Dropdown.dropdown_list:
+        dropdown.draw()
+    for textField in UI_Elements.TextField.textField_list:
+        textField.draw()
+    for header in UI_Elements.Header.header_list:
+        header.draw()
+        
+    team_color.draw()
+
+    pg.draw.rect(WIN, generate_button_color, generate_rect,
+                 border_radius=action_buttons_size // 5)
+    WIN.blit(generate_render, (generate_rect.x +
+             generate_render.get_width() * .05, generate_rect.y - ((generate_render.get_height() - action_buttons_size) / 2)))
+    pg.draw.rect(WIN, reset_button_color, reset_rect,
+                 border_radius=action_buttons_size // 5)
+    WIN.blit(reset_render, (reset_rect.x +
+             reset_render.get_width() * .05, reset_rect.y - ((reset_render.get_height() - action_buttons_size) / 2)))
+
+    Scrolling.drawScrollBar()
+
+    pg.display.flip()
+
+
+if __name__ == '__main__':
+    main()
