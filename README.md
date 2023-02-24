@@ -115,6 +115,7 @@ Every input field has values that can be changed at and/or after initialization.
 - options: list (of strings)
 - title: str = ""
 - title_size: int = 14
+- title_placement: str = "u" (u and r are accepted)
 
 **After initialization:**
 - x: float
