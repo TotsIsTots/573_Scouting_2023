@@ -31,7 +31,9 @@ def main():
     a_level_2 = UI_Elements.Counter(20, 350, 48, 0, 'Score Level 2', 24, 'r')
     a_level_3 = UI_Elements.Counter(20, 400, 48, 0, 'Score Level 3', 24, 'r')
     
-    community_checkbox = UI_Elements.Checkmark(320, 305, 'Leave community?', 32)
+    community_checkbox = UI_Elements.Checkmark(500, 305, 'Leave community?', 32)
+    
+    a_charging_station = UI_Elements.Dropdown(320, 305, 150, 40, ['No', 'Docked', 'Engaged'], 'Charging Station', 24)
     
     
     teleop_header = UI_Elements.Header(500, 'Teleop', 24)
@@ -45,18 +47,18 @@ def main():
     
     endgame_header = UI_Elements.Header(730, 'Endgame', 24)
     
-    docked = UI_Elements.Checkmark(20, 760, 'Docked on Charging Station?', 32)
-    engaged = UI_Elements.Checkmark(20, 810, 'Charging station engaged?', 32)
+    e_charging_station = UI_Elements.Dropdown(20, 770, 150, 40, ['No', 'Docked', 'Engaged'], 'Charging Station', 24)
     
-    breakdown = UI_Elements.Checkmark(450, 760, 'Robot Breakdown?', 32)
     
-    win = UI_Elements.Checkmark(450, 810, 'Win?', 32)
+    postmatch_header = UI_Elements.Header(960, 'Postmatch', 24)
     
-    defense = UI_Elements.Dropdown(20, 900, 100, 40, ['None', 'Low', 'High'], 'Defense', 24)
+    penalties = UI_Elements.Checkmark(20, 1000, 'Penalties?', 32)
     
-    penalties = UI_Elements.Checkmark(150, 900, 'Penalties?', 32)
+    breakdown = UI_Elements.Checkmark(20, 1050, 'Robot Breakdown?', 32)
     
-    comments = UI_Elements.TextField(350, 900, 400, 300, 24, title='Comments', title_size=24)
+    defense = UI_Elements.Dropdown(20, 1130, 380, 40, ["Didn't Play", "Played Poorly", "Played Some Well", "Completely Played Very Well"], 'Defense', 24)
+    
+    comments = UI_Elements.TextField(420, 1000, 330, 300, 24, title='Comments', title_size=24)
     
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
     #!!!===                 It is not reccomended to change anything below this line.                       ===!!!
