@@ -9,21 +9,35 @@ import configparser
 def main():
     # it is HIGHLY reccomended that these exist, but you can change parameters such as size, position etc.
     global match_number, team_color, team_number
-    match_number = UI_Elements.Counter(
-        20, 80, 64, 1, "Match number", 32)
-    
-    team_color = UI_Elements.TeamColorToggle(20, 150, 'Color', 64)
-    
+
     if matches:
         team_number = UI_Elements.Dropdown(
-            20, 270, 120, 50, matches[match_number.value - 1]['red'], "Team number", 32)
+            20, 70, 80, 40, matches[match_number.value - 1]['red'], "Team number", 24)
     else:
         team_number = UI_Elements.TextField(
-            20, 270, 120, 50, 30, title='Team Number', title_size=32)
+            20, 70, 80, 40, 30, title='Team Number', title_size=24)
 
     # Initialize data input objects and headers here, QR code lists data in order of initialization
+
+    header = UI_Elements.Header(20, "Pit Scouting", 24)
     
+    drivetrain_type = UI_Elements.Dropdown(180, 70, 150, 40, ["Mecanum", "Swerve", "Tank", "Other"], "Drivetrain Type", 24)
     
+    cubes = UI_Elements.Checkmark(360, 70, "Can it score cubes?", 32)
+    cones = UI_Elements.Checkmark(360, 110, "Can it score cones?", 32)
+    
+    level_1 = UI_Elements.Checkmark(360, 150, "Can it score level 1?", 32)
+    level_2 = UI_Elements.Checkmark(360, 190, "Can it score level 2?", 32)
+    level_3 = UI_Elements.Checkmark(360, 230, "Can it score level 3?", 32)
+
+    charging_station = UI_Elements.Dropdown(360, 300, 400, 40, ["Can't Balance", "Can balance", "Balance with two other robots"], "Charging station", 24)
+    
+    auton = UI_Elements.TextField(20, 300, 300, 170, 30, title='What does it do in autonomous?', title_size=24)
+    
+    score_method = UI_Elements.TextField(20, 500, 300, 170, 30, title='How does it score?', title_size=24)
+    
+    notes = UI_Elements.TextField(360, 500, 400, 220, 30, title='Comments/Special Elements', title_size=24)
+
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
     #!!!===                 It is not reccomended to change anything below this line.                       ===!!!
 
@@ -39,7 +53,6 @@ def main():
             UI_Elements.Dropdown.handleInput(event)
             UI_Elements.Checkmark.handleInput(event)
             UI_Elements.Counter.handleInput(event)
-            team_color.handleInput(event)
 
             # Generate and Reset buttons
             handleActionInputs(event)
@@ -55,10 +68,10 @@ def main():
         UI_Elements.Dropdown.update()
         UI_Elements.Checkmark.update()
         UI_Elements.TextField.update()
-        team_color.update()
-        
+
         if matches:
-            team_number.options = matches[match_number.value - 1][team_color.value]
+            team_number.options = matches[match_number.value -
+                                          1][team_color.value]
 
         drawDisplay(screen_w, screen_h)
 
@@ -75,7 +88,8 @@ UI_Elements.init()
 config = configparser.ConfigParser()
 config.read(os.path.basename(__file__)[0:-3] + '_config.ini')
 
-matches = list(eval(config['Matches']['match_list'])) if config['Matches']['match_list'] != '' else None
+matches = list(eval(config['Matches']['match_list'])
+               ) if config['Matches']['match_list'] != '' else None
 
 Scrolling.scroll_speed = int(config['Scrolling']['scroll_speed'])
 Scrolling.display_height = int(config['Scrolling']['display_height'])
@@ -153,7 +167,6 @@ def handleScrolling(scroll_change):
         dropdown.y -= scroll_change
     for textField in UI_Elements.TextField.textField_list:
         textField.y -= scroll_change
-    team_color.y -= scroll_change
 
     generate_rect.y -= scroll_change
     reset_rect.y -= scroll_change
@@ -163,9 +176,8 @@ def handleActionInputs(event):
     if event.type == pg.MOUSEBUTTONDOWN and pg.mouse.get_pressed()[0]:
         mouse_pos = pg.mouse.get_pos()
         if generate_rect.collidepoint(mouse_pos):
-            QR.saveAndShow(str(date.today()) + '_Match_' + str(match_number.value) +
-                           '_Team_' + (team_number.selected_str if matches else team_number.content[0]), compileData(), QR_display_size, (screen_w, screen_h), QR_save_path)
-            match_number.value += 1
+            QR.saveAndShow(str(date.today()) + '_Pit_Team_' + (team_number.selected_str if matches else team_number.content[0]), compileData(
+            ), QR_display_size, (screen_w, screen_h), QR_save_path)
         if reset_rect.collidepoint(mouse_pos):
             reset()
 
@@ -189,8 +201,6 @@ def drawDisplay(screen_w, screen_h):
         textField.draw()
     for header in UI_Elements.Header.header_list:
         header.draw()
-        
-    team_color.draw()
 
     pg.draw.rect(WIN, generate_button_color, generate_rect,
                  border_radius=action_buttons_size // 5)
