@@ -27,27 +27,32 @@ def main():
     
     auton_header = UI_Elements.Header(270, 'Autonomous', 24)
     
-    a_level_1 = UI_Elements.Counter(20, 300, 48, 0, 'Score Level 1', 24, 'r')
-    a_level_2 = UI_Elements.Counter(20, 350, 48, 0, 'Score Level 2', 24, 'r')
-    a_level_3 = UI_Elements.Counter(20, 400, 48, 0, 'Score Level 3', 24, 'r')
+    a_top_cone = UI_Elements.Counter(20, 300, 48, 0, 'Top cones', 24, 'r')
+    a_mid_cone = UI_Elements.Counter(20, 350, 48, 0, 'Mid cones', 24, 'r')
+    a_bot_cone = UI_Elements.Counter(20, 400, 48, 0, 'Bot cones', 24, 'r')
     
-    community_checkbox = UI_Elements.Checkmark(500, 305, 'Leave community?', 32)
+    a_top_cube = UI_Elements.Counter(280, 300, 48, 0, 'Top cubes', 24, 'r')
+    a_mid_cube = UI_Elements.Counter(280, 350, 48, 0, 'Mid cubes', 24, 'r')
+    a_bot_cube = UI_Elements.Counter(280, 400, 48, 0, 'Bot cubes', 24, 'r')
     
-    a_charging_station = UI_Elements.Dropdown(320, 305, 150, 40, ['No', 'Docked', 'Engaged'], 'Charging Station', 24)
-    
+    a_charging_station = UI_Elements.Dropdown(550, 305, 160, 32, ['No', 'Left community', 'Docked', 'Engaged'], 'Charging Station/Community', 20)
     
     teleop_header = UI_Elements.Header(500, 'Teleop', 24)
     
-    t_level_1 = UI_Elements.Counter(20, 530, 48, 0, 'Score Level 1', 24, 'r')
-    t_level_2 = UI_Elements.Counter(20, 580, 48, 0, 'Score Level 2', 24, 'r')
-    t_level_3 = UI_Elements.Counter(20, 630, 48, 0, 'Score Level 3', 24, 'r')
+    t_top_cone = UI_Elements.Counter(20, 530, 48, 0, 'Top cones', 24, 'r')
+    t_mid_cone = UI_Elements.Counter(20, 580, 48, 0, 'Mid cones', 24, 'r')
+    t_bot_cone = UI_Elements.Counter(20, 630, 48, 0, 'Bot cones', 24, 'r')
     
-    links_scored = UI_Elements.Counter(320, 550, 48, 0, 'Links Scored', 24)
+    t_top_cube = UI_Elements.Counter(280, 530, 48, 0, 'Top cubes', 24, 'r')
+    t_mid_cube = UI_Elements.Counter(280, 580, 48, 0, 'Mid cubes', 24, 'r')
+    t_bot_cube = UI_Elements.Counter(280, 630, 48, 0, 'Bot cubes', 24, 'r')
+
+    links_scored = UI_Elements.Counter(550, 550, 48, 0, 'Links Scored', 24)
     
     
     endgame_header = UI_Elements.Header(730, 'Endgame', 24)
     
-    e_charging_station = UI_Elements.Dropdown(20, 770, 150, 40, ['No', 'Docked', 'Engaged'], 'Charging Station', 24)
+    e_charging_station = UI_Elements.Dropdown(20, 770, 150, 32, ['No', 'Parked', 'Docked', 'Engaged'], 'Charging Station/Community', 24)
     
     
     postmatch_header = UI_Elements.Header(960, 'Postmatch', 24)
