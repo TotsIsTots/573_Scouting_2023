@@ -13,6 +13,8 @@ Running the scouting app requires the modules pygame, qrcode, and Pillow to be i
 
 When these modules are installed, clone this repository and run "main.py". Every time a QR Code is generated, it will be saved to the "QR Codes" folder with the date, match number, and team number selected.
 
+If git is installed, you can copy and paste this command to clone this repository and install required packages at the same time: `git clone https://github.com/TotsIsTots/573_Scouting_2023 && pip install pygame qrcode Pillow tbapy pyperclip`
+
 ## Settings
 The settings are stored in the "main_config.ini" file. It looks like this inside:
 ```
