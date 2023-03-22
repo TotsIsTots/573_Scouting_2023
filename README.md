@@ -4,7 +4,7 @@ This repository serves as a template for making data input fields for scouting i
 
 Data from the QR codes can be handled however it is needed, but we are working on an android app solution to do this for you, putting the data in a .csv file. It can be found [here](https://github.com/PIPIPIG233666/scouting_app) (work in progress).
 
-The data will come out in this order: match number, team color, team number, auton top cones, auton middle cones, auton bottom cones, auton top cubes, auton middle cubes, auton bottom cubes, auton charging station/community status, teleop top cones, teleop middle cones, teleop bottom cones, teleop top cubes, teleop middle cubes, teleop bottom cubes, links scored, endgame charging station/community status, penalties, breakdown, defense, comments
+The data will come out in this order: match number, team color, team number, auton top cones, auton middle cones, auton bottom cones, auton top cubes, auton middle cubes, auton bottom cubes, auton charging station status, auton left community, teleop top cones, teleop middle cones, teleop bottom cones, teleop top cubes, teleop middle cubes, teleop bottom cubes, links scored, endgame charging station/community status, penalties, breakdown, defense, comments
 
 ## Installation and Running
 Python is required for running. If it is not already installed, you can download and install it from [here](https://www.python.org/downloads/). When installing, make sure to select "Add Python 3.xx to PATH" when prompted.
