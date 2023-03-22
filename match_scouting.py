@@ -35,7 +35,8 @@ def main():
     a_mid_cube = UI_Elements.Counter(280, 350, 48, 0, 'Mid cubes', 24, 'r')
     a_bot_cube = UI_Elements.Counter(280, 400, 48, 0, 'Bot cubes', 24, 'r')
     
-    a_charging_station = UI_Elements.Dropdown(550, 305, 160, 32, ['No', 'Left community', 'Docked', 'Engaged'], 'Charging Station/Community', 20)
+    a_charging_station = UI_Elements.Dropdown(550, 305, 100, 32, ['No', 'Docked', 'Engaged'], 'Charging Station', 20)
+    a_left_community = UI_Elements.Checkmark(550, 450, 'Left Community', 32)
     
     teleop_header = UI_Elements.Header(500, 'Teleop', 24)
     
@@ -63,7 +64,7 @@ def main():
     
     defense = UI_Elements.Dropdown(20, 1130, 380, 40, ["Didn't Play", "Played Poorly", "Played Some Well", "Completely Played Very Well"], 'Defense', 24)
     
-    comments = UI_Elements.TextField(420, 1000, 330, 300, 24, title='Comments', title_size=24)
+    comments = UI_Elements.TextField(420, 1000, 330, 300, 24, title='Comments/Breakdown Details', title_size=24)
     
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
     #!!!===                 It is not reccomended to change anything below this line.                       ===!!!
@@ -98,8 +99,10 @@ def main():
         UI_Elements.TextField.update()
         team_color.update()
         
-        if matches:
+        if matches and match_number.value > 0 and match_number.value <= len(matches):
             team_number.options = matches[match_number.value - 1][team_color.value]
+        elif matches:
+            team_number.options = ["Invalid!", "Invalid!", "Invalid!"]
 
         drawDisplay(screen_w, screen_h)
 
@@ -166,7 +169,7 @@ def compileData(seperator: str = ',') -> str:
         if type(element).__name__ == "Dropdown":
             data += element.selected_str + seperator
         if type(element).__name__ == "TextField":
-            data += element.get_string() + seperator
+            data += element.get_string().replace(",", "■") + seperator
     return data[:len(data) - len(seperator)]
 
 
