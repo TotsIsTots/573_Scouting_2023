@@ -6,7 +6,7 @@ pg.font.init()
 
 
 def saveAndShow(name: str, data: str, size: float, original_display_size: tuple, save_path: str):
-    display = pg.display.set_mode((size, size))
+    display = pg.display.set_mode((size, size + size // 16))
 
     # creates QR code
     img = qrcode.make(data)
@@ -25,8 +25,11 @@ def saveAndShow(name: str, data: str, size: float, original_display_size: tuple,
 
             if event.type == pg.QUIT:
                 showing = False
-
-        display.blit(img, (0, 0))
+        
+        background = pg.Surface((size, size + size // 16))
+        background.fill((255, 255, 255))
+        display.blit(background, (0, 0))
+        display.blit(img, (0, size // 16))
         display.blit(arial.render('Click to continue', 1,
                      (0, 0, 0), (255, 255, 255)), (size // 64, 0))
         pg.display.flip()
