@@ -181,9 +181,13 @@ def reset():
         if type(element).__name__ == "Checkmark":
             element.value = False
         if type(element).__name__ == "Dropdown":
-            element.selected_num = -1
+            if element != team_number:
+                element.selected_num = -1
         if type(element).__name__ == "TextField":
             element.content = ['']
+            
+    handleScrolling(-Scrolling.scroll_off)
+    Scrolling.scroll_off = 0
 
 
 def handleScrolling(scroll_change):
@@ -208,7 +212,7 @@ def handleActionInputs(event):
         mouse_pos = pg.mouse.get_pos()
         if generate_rect.collidepoint(mouse_pos):
             QR.saveAndShow(str(date.today()) + '_Match_' + str(match_number.value) +
-                           '_Team_' + (team_number.selected_str if matches else team_number.content[0]), compileData(), QR_display_size, (screen_w, screen_h), QR_save_path)
+                           '_Team_' + (team_number.selected_str if matches else team_number.content[0]), compileData(), QR_display_size, pg.display.get_window_size(), QR_save_path)
             match_number.value += 1
         if reset_rect.collidepoint(mouse_pos):
             reset()

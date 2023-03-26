@@ -18,7 +18,7 @@ def get_off(event) -> float:
     global selected
     screen_w, screen_h = pg.display.get_surface().get_size()
     mouse_x, mouse_y = pg.mouse.get_pos()
-    if pg.mouse.get_pressed().__contains__(1) and mouse_x > pg.display.get_surface().get_size()[0] - 8:
+    if pg.mouse.get_pressed().__contains__(1) and mouse_x > pg.display.get_surface().get_size()[0] - 16:
         selected = True
     if not pg.mouse.get_pressed().__contains__(1):
         selected = False
@@ -39,18 +39,19 @@ def get_off(event) -> float:
     if selected and screen_h < display_height:
         if mouse_y > scroll_off * screen_h / display_height and mouse_y < (scroll_off * screen_h / display_height) + (screen_h ** 2 / display_height):
             scroll_off += pg.mouse.get_rel()[1] * display_height / screen_h
-            if scroll_off < 0:
-                scroll_off = 0
-            if scroll_off > display_height - screen_h:
-                scroll_off = display_height - screen_h
         else:
             if mouse_y < scroll_off * screen_h / display_height:
                 scroll_off = mouse_y * display_height / screen_h
             else:
                 scroll_off = (mouse_y - (screen_h ** 2 / display_height)) * display_height / screen_h
+        if scroll_off < 0:
+            scroll_off = 0
+        if scroll_off > display_height - screen_h:
+            scroll_off = display_height - screen_h
 
     pg.mouse.get_rel()
-    scroll_off = float(scroll_off)
+    # scroll_off = float(scroll_off)
+    scroll_off = int(scroll_off)
     return scroll_off
 
 
@@ -62,7 +63,7 @@ def get_change(event) -> float:
     return scroll_change
 
 
-def drawScrollBar(thickness: float = 8):
+def drawScrollBar(thickness: float = 16):
     screen_w, screen_h = pg.display.get_surface().get_size()
     if screen_h < display_height:
         # define and draw scroll bar

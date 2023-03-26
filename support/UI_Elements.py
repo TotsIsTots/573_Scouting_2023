@@ -34,7 +34,8 @@ class Header:
         self.thickness = thickness
         self.size = size
         self.title = title
-        self.title_font = pg.font.SysFont('arial', size, bold)
+        self.title_font = pg.font.Font('Assets/arial.ttf', size)
+        self.title_font.set_bold(bold)
         self.title_render = self.title_font.render(title, 1, color)
         self.color = color
 
@@ -61,7 +62,7 @@ class Counter:
         # defines title values
         self.title = title
         if title != "":
-            self.title_font = pg.font.SysFont('arial', title_size)
+            self.title_font = pg.font.Font('Assets/arial.ttf', title_size)
             self.title_font_color = (16, 16, 16)
             self.title_render = self.title_font.render(
                 str(title), 1, self.title_font_color)
@@ -74,7 +75,7 @@ class Counter:
                 
 
         # defines counter values
-        self.font = pg.font.SysFont('arial', size)
+        self.font = pg.font.Font('Assets/arial.ttf', size)
         self.font_color = (0, 0, 0)
         self.value = value
         self.value_render = self.font.render(str(value), 1, self.font_color)
@@ -162,7 +163,7 @@ class Dropdown:
         self.selected_num = -1
         self.selected_str = ""
 
-        self.opened = False
+        self.opened = True
 
         # define dropdown boxes
         self.border_thickness = 4
@@ -187,7 +188,7 @@ class Dropdown:
         self.title = title
         self.title_size = title_size
         self.title_color = (0, 0, 0)
-        self.title_font = pg.font.SysFont('arial', self.title_size)
+        self.title_font = pg.font.Font('Assets/arial.ttf', self.title_size)
         self.title_render = self.title_font.render(title, 1, self.title_color)
 
         Dropdown.dropdown_list.append(self)
@@ -283,7 +284,7 @@ class Checkmark:
         # defines title values
         self.title = title
         self.title_color = (0, 0, 0)
-        self.title_font = pg.font.SysFont('arial', size)
+        self.title_font = pg.font.Font('Assets/arial.ttf', size)
         self.title_render = self.title_font.render(title, 1, self.title_color)
 
         # calculates checkbox placement
@@ -339,7 +340,7 @@ class Checkmark:
 
     def update():
         for c in Checkmark.checkmark_list:
-            c.title_font = pg.font.SysFont('arial', c.size)
+            c.title_font = pg.font.Font('Assets/arial.ttf', c.size)
             c.title_render = c.title_font.render(c.title, 1, c.title_color)
             c.box.thickness = c.box_thickness
             c.check = pg.transform.smoothscale(
@@ -369,7 +370,7 @@ class TextField:
         if title != '':
             self.title_size = title_size
             self.title_color = (0, 0, 0)
-            self.title_font = pg.font.SysFont('arial', title_size)
+            self.title_font = pg.font.Font('Assets/arial.ttf', title_size)
             self.title_render = self.title_font.render(
                 title, 1, self.title_color)
             self.title_x, self.title_y = x, y - (title_size * 1.1)
@@ -377,7 +378,7 @@ class TextField:
         # define text field font and lists
         self.text_size = text_size
         self.font_color = (0, 0, 0)
-        self.font = pg.font.SysFont('arial', text_size)
+        self.font = pg.font.Font('Assets/arial.ttf', text_size)
         self.font_height = self.font.render(
             '', 0, (0, 0, 0), (0, 0, 0)).get_height()
         self.renders = []
@@ -579,7 +580,7 @@ class TeamColorToggle:
         # defines title values
         self.title = title
         self.title_color = (0, 0, 0)
-        self.title_font = pg.font.SysFont('arial', size)
+        self.title_font = pg.font.Font('Assets/arial.ttf', size)
         self.title_render = self.title_font.render(title, 1, self.title_color)
 
         # calculates checkbox placement
@@ -630,7 +631,7 @@ class TeamColorToggle:
                     self.box_color = (255, 0, 0)
 
     def update(self):
-        self.title_font = pg.font.SysFont('arial', self.size)
+        self.title_font = pg.font.Font('Assets/arial.ttf', self.size)
         self.title_render = self.title_font.render(self.title, 1, self.title_color)
         self.box.thickness = self.box_thickness
 
