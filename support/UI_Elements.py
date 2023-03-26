@@ -408,7 +408,7 @@ class TextField:
         # returns string of text field
         string = ''
         for line in self.content:
-            string += line + '\n'
+            string += line + '$nl'
         return string[:len(string) - 1]
 
     def wrap(self):
