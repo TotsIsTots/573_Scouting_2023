@@ -74,7 +74,7 @@ def drawScrollBar(thickness: float = 16):
 
         # define and draw scroll bar handle
         scroller = pg.Surface((thickness, screen_h ** 2 / display_height))
-        scroller.fill((100, 100, 100))
+        scroller.fill((200, 200, 200))
         scroller.set_alpha(160)
         win.blit(scroller, (screen_w - thickness,
                  scroll_off * screen_h / display_height))

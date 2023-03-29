@@ -30,13 +30,13 @@ def main():
     a_mid_cone = UI_Elements.Counter(20, 350, 48, 0, 'Mid cones', 24, 'r')
     a_bot_cone = UI_Elements.Counter(20, 400, 48, 0, 'Bot cones', 24, 'r')
 
-    a_top_cube = UI_Elements.Counter(280, 300, 48, 0, 'Top cubes', 24, 'r')
-    a_mid_cube = UI_Elements.Counter(280, 350, 48, 0, 'Mid cubes', 24, 'r')
-    a_bot_cube = UI_Elements.Counter(280, 400, 48, 0, 'Bot cubes', 24, 'r')
+    a_top_cube = UI_Elements.Counter(300, 300, 48, 0, 'Top cubes', 24, 'r')
+    a_mid_cube = UI_Elements.Counter(300, 350, 48, 0, 'Mid cubes', 24, 'r')
+    a_bot_cube = UI_Elements.Counter(300, 400, 48, 0, 'Bot cubes', 24, 'r')
 
     a_charging_station = UI_Elements.Dropdown(
-        550, 305, 100, 32, ['No', 'Docked', 'Engaged'], 'Charging Station', 20)
-    a_left_community = UI_Elements.Checkmark(550, 450, 'Left Community', 32)
+        590, 305, 100, 32, ['No', 'Docked', 'Engaged'], 'Charging Station', 20)
+    a_left_community = UI_Elements.Checkmark(590, 450, 'Left Community', 32)
 
     teleop_header = UI_Elements.Header(500, 'Teleop', 24)
 
@@ -44,11 +44,11 @@ def main():
     t_mid_cone = UI_Elements.Counter(20, 580, 48, 0, 'Mid cones', 24, 'r')
     t_bot_cone = UI_Elements.Counter(20, 630, 48, 0, 'Bot cones', 24, 'r')
 
-    t_top_cube = UI_Elements.Counter(280, 530, 48, 0, 'Top cubes', 24, 'r')
-    t_mid_cube = UI_Elements.Counter(280, 580, 48, 0, 'Mid cubes', 24, 'r')
-    t_bot_cube = UI_Elements.Counter(280, 630, 48, 0, 'Bot cubes', 24, 'r')
+    t_top_cube = UI_Elements.Counter(300, 530, 48, 0, 'Top cubes', 24, 'r')
+    t_mid_cube = UI_Elements.Counter(300, 580, 48, 0, 'Mid cubes', 24, 'r')
+    t_bot_cube = UI_Elements.Counter(300, 630, 48, 0, 'Bot cubes', 24, 'r')
 
-    links_scored = UI_Elements.Counter(550, 550, 48, 0, 'Links Scored', 24)
+    links_scored = UI_Elements.Counter(590, 550, 48, 0, 'Links Scored', 24)
 
     endgame_header = UI_Elements.Header(730, 'Endgame', 24)
 
@@ -84,8 +84,10 @@ def main():
             UI_Elements.Counter.handleInput(event)
             team_color.handleInput(event)
 
+
             # Generate and Reset buttons
-            handleActionInputs(event)
+            try: show_next = handleActionInputs(event, show_next)
+            except UnboundLocalError: show_next = handleActionInputs(event, False)
 
             # handles scrolling from scroll offset
             handleScrolling(Scrolling.get_change(event))
@@ -106,7 +108,10 @@ def main():
         elif matches:
             team_number.options = ["Invalid!", "Invalid!", "Invalid!"]
 
-        drawDisplay(screen_w, screen_h)
+        drawDisplay(screen_w, screen_h, show_next)
+        
+        # print(f'main {show_next}')
+
 
 
 pg.font.init()
@@ -140,10 +145,10 @@ generate_button_color = tuple(
     map(int, config['ActionButtons']['generate_button_color'].split(',')))
 generate_text_color = tuple(
     map(int, config['ActionButtons']['generate_text_color'].split(',')))
-reset_button_color = tuple(
-    map(int, config['ActionButtons']['reset_button_color'].split(',')))
-reset_text_color = tuple(
-    map(int, config['ActionButtons']['reset_text_color'].split(',')))
+next_button_color = tuple(
+    map(int, config['ActionButtons']['next_button_color'].split(',')))
+next_text_color = tuple(
+    map(int, config['ActionButtons']['next_text_color'].split(',')))
 
 QR_display_size = int(config['QRCodes']['display_size'])
 QR_save_path = config['QRCodes']['save_path']
@@ -159,10 +164,12 @@ action_font = pg.font.SysFont('arial', action_buttons_size)
 generate_render = action_font.render('Generate', 1, generate_text_color)
 generate_rect = pg.Rect(
     action_buttons_pos[0], action_buttons_pos[1], generate_render.get_width() * 1.1, action_buttons_size)
-reset_render = action_font.render('Reset', 1, reset_text_color)
-reset_rect = pg.Rect(
-    action_buttons_pos[0] + generate_render.get_width() * 1.2, action_buttons_pos[1], reset_render.get_width() * 1.1, action_buttons_size)
+next_render = action_font.render('Next Match', 1, next_text_color)
+next_rect = pg.Rect(
+    action_buttons_pos[0] + generate_render.get_width() * 1.2, action_buttons_pos[1], next_render.get_width() * 1.1, action_buttons_size)
 
+show_next = False
+print("show_next start")
 
 def compileData(seperator: str = ',') -> str:
     data = ''
@@ -176,7 +183,7 @@ def compileData(seperator: str = ',') -> str:
     return data[:len(data) - len(seperator)]
 
 
-def reset():
+def nextMatch():
     for element in UI_Elements.list:
         if type(element).__name__ == "Counter":
             if element != match_number:
@@ -193,6 +200,8 @@ def reset():
 
     handleScrolling(-Scrolling.scroll_off)
     Scrolling.scroll_off = 0
+    
+    match_number.value += 1
 
 
 def handleScrolling(scroll_change):
@@ -209,18 +218,22 @@ def handleScrolling(scroll_change):
     team_color.y -= scroll_change
 
     generate_rect.y -= scroll_change
-    reset_rect.y -= scroll_change
+    next_rect.y -= scroll_change
 
 
-def handleActionInputs(event):
+def handleActionInputs(event, show_next):
+    # try: print(f'click {show_next}', end=', ')
+    # except UnboundLocalError: print('click show_next nonexist', end=', ')
     if event.type == pg.MOUSEBUTTONDOWN and pg.mouse.get_pressed()[0]:
         mouse_pos = pg.mouse.get_pos()
         if generate_rect.collidepoint(mouse_pos):
+            show_next = True
             QR.saveAndShow(str(date.today()) + '_Match_' + str(match_number.value) +
                            '_Team_' + (team_number.selected_str if matches else team_number.content[0]), compileData(), QR_display_size, pg.display.get_window_size(), QR_save_path)
-            match_number.value += 1
-        if reset_rect.collidepoint(mouse_pos):
-            reset()
+        if show_next and next_rect.collidepoint(mouse_pos):
+            nextMatch()
+            show_next = False
+    return show_next
 
 
 def drawBackground(screen_w, screen_h):
@@ -229,7 +242,8 @@ def drawBackground(screen_w, screen_h):
             WIN.blit(BACKGROUND, (x * BACKGROUND_W, y * BACKGROUND_H))
 
 
-def drawDisplay(screen_w, screen_h):
+def drawDisplay(screen_w, screen_h, show_next):
+    # print(f'drawing {show_next}', end=', ')
     drawBackground(screen_w, screen_h)
 
     for counter in UI_Elements.Counter.counter_list:
@@ -249,10 +263,12 @@ def drawDisplay(screen_w, screen_h):
                  border_radius=action_buttons_size // 5)
     WIN.blit(generate_render, (generate_rect.x +
              generate_render.get_width() * .05, generate_rect.y - ((generate_render.get_height() - action_buttons_size) / 2)))
-    pg.draw.rect(WIN, reset_button_color, reset_rect,
-                 border_radius=action_buttons_size // 5)
-    WIN.blit(reset_render, (reset_rect.x +
-             reset_render.get_width() * .05, reset_rect.y - ((reset_render.get_height() - action_buttons_size) / 2)))
+    
+    if show_next:
+        pg.draw.rect(WIN, next_button_color, next_rect,
+                    border_radius=action_buttons_size // 5)
+        WIN.blit(next_render, (next_rect.x +
+                next_render.get_width() * .05, next_rect.y - ((next_render.get_height() - action_buttons_size) / 2)))
 
     Scrolling.drawScrollBar()
 

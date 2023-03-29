@@ -29,7 +29,7 @@ class BorderRect:
 class Header:
     header_list = []
 
-    def __init__(self, y: float, title: str, size: int, thickness: float = 2, color: tuple = (100, 100, 100), bold: bool = True):
+    def __init__(self, y: float, title: str, size: int, thickness: float = 2, color: tuple = (65, 65, 65), bold: bool = True):
         self.y = y
         self.thickness = thickness
         self.size = size
@@ -63,7 +63,7 @@ class Counter:
         self.title = title
         if title != "":
             self.title_font = pg.font.Font('Assets/arial.ttf', title_size)
-            self.title_font_color = (16, 16, 16)
+            self.title_font_color = (65, 65, 65)
             self.title_render = self.title_font.render(
                 str(title), 1, self.title_font_color)
             if self.title_placement == 'u':
@@ -76,7 +76,7 @@ class Counter:
 
         # defines counter values
         self.font = pg.font.Font('Assets/arial.ttf', size)
-        self.font_color = (0, 0, 0)
+        self.font_color = (65, 65, 65)
         self.value = value
         self.value_render = self.font.render(str(value), 1, self.font_color)
         self.value_render_x, self.value_render_y = size * 1.1 + \
@@ -168,13 +168,13 @@ class Dropdown:
         # define dropdown boxes
         self.border_thickness = 4
         self.inner_border_thickness = 2
-        self.border_color = (0, 0, 0)
-        self.background_color = (255, 255, 255)
+        self.border_color = (65, 65, 65)
+        self.background_color = (20, 20, 20)
 
         # define font and renders
         self.font = pg.font.SysFont(
             'arial', height - (self.border_thickness * 2))
-        self.font_color = (0, 0, 0)
+        self.font_color = (65, 65, 65)
         self.option_renders = []
         for option in options:
             self.option_renders.append(
@@ -187,7 +187,7 @@ class Dropdown:
         # define title values
         self.title = title
         self.title_size = title_size
-        self.title_color = (0, 0, 0)
+        self.title_color = (65, 65, 65)
         self.title_font = pg.font.Font('Assets/arial.ttf', self.title_size)
         self.title_render = self.title_font.render(title, 1, self.title_color)
 
@@ -283,7 +283,7 @@ class Checkmark:
 
         # defines title values
         self.title = title
-        self.title_color = (0, 0, 0)
+        self.title_color = (65, 65, 65)
         self.title_font = pg.font.Font('Assets/arial.ttf', size)
         self.title_render = self.title_font.render(title, 1, self.title_color)
 
@@ -302,8 +302,8 @@ class Checkmark:
         elif self.check_placement == 'r':
             self.box = BorderRect(x + self.title_render.get_width() + (size * 0.2), y + (
                 (self.title_render.get_height() - size) / 2), size, size, self.box_thickness)
-        self.box_color = (255, 255, 255)
-        self.box_border_color = (0, 0, 0)
+        self.box_color = (20, 20, 20)
+        self.box_border_color = (65, 65, 65)
 
         self.value = False
         self.check = pg.transform.smoothscale(pg.image.load(os.path.join(
@@ -362,6 +362,7 @@ class TextField:
 
     def __init__(self, x: float, y: float, width: float, height: float, text_size: int, border_thickness: float = 4, title: str = '', title_size: str = 14):
         # define dimensions
+
         self.x, self.y = x, y
         self.width, self.height = width, height
 
@@ -369,7 +370,7 @@ class TextField:
         self.title = title
         if title != '':
             self.title_size = title_size
-            self.title_color = (0, 0, 0)
+            self.title_color = (65, 65, 65)
             self.title_font = pg.font.Font('Assets/arial.ttf', title_size)
             self.title_render = self.title_font.render(
                 title, 1, self.title_color)
@@ -377,7 +378,7 @@ class TextField:
 
         # define text field font and lists
         self.text_size = text_size
-        self.font_color = (0, 0, 0)
+        self.font_color = (65, 65, 65)
         self.font = pg.font.Font('Assets/arial.ttf', text_size)
         self.font_height = self.font.render(
             '', 0, (0, 0, 0), (0, 0, 0)).get_height()
@@ -387,13 +388,13 @@ class TextField:
         # define box values
         self.border_thickness = border_thickness
         self.box = BorderRect(x, y, width, height, border_thickness)
-        self.color = (255, 255, 255)
-        self.unselected_color = (128, 128, 128)
-        self.selected_color = (0, 0, 0)
+        self.color = (20, 20, 20)
+        self.unselected_color = (32, 32, 32)
+        self.selected_color = (65, 65, 65)
         self.selected = False
 
         # define cursor values
-        self.cursor_color = (0, 0, 0)
+        self.cursor_color = (65, 65, 65)
         self.cursor_off_x, self.cursor_off_y = self.x + self.border_thickness + \
             (self.text_size * 0.1), self.y + self.border_thickness + \
             ((self.font_height - self.text_size) / 2)
@@ -579,7 +580,7 @@ class TeamColorToggle:
 
         # defines title values
         self.title = title
-        self.title_color = (0, 0, 0)
+        self.title_color = (65, 65, 65)
         self.title_font = pg.font.Font('Assets/arial.ttf', size)
         self.title_render = self.title_font.render(title, 1, self.title_color)
 
@@ -598,8 +599,8 @@ class TeamColorToggle:
         elif self.box_placement == 'r':
             self.box = BorderRect(x + self.title_render.get_width() + (size * 0.2), y + (
                 (self.title_render.get_height() - size) / 2), size, size, self.box_thickness)
-        self.box_color = (255, 0, 0)
-        self.box_border_color = (0, 0, 0)
+        self.box_color = (150, 0, 0)
+        self.box_border_color = (65, 65, 65)
 
         self.value = 'red'
 
@@ -625,10 +626,10 @@ class TeamColorToggle:
             if pg.Rect(self.box.x, self.box.y, self.size, self.size).collidepoint(mouse_pos):
                 if self.value == 'red':
                     self.value = 'blue'
-                    self.box_color = (0, 0, 255)
+                    self.box_color = (0, 0, 150)
                 else:
                     self.value = 'red'
-                    self.box_color = (255, 0, 0)
+                    self.box_color = (150, 0, 0)
 
     def update(self):
         self.title_font = pg.font.Font('Assets/arial.ttf', self.size)
