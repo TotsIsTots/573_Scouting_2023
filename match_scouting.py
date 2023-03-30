@@ -12,14 +12,16 @@ def main():
     match_number = UI_Elements.Counter(
         20, 80, 48, 1, "Match number", 24)
 
-    team_color = UI_Elements.TeamColorToggle(200, 85, 'Color', 32)
+    team_color = UI_Elements.TeamColorToggle(200, 85, 'Color', 32, alliance_color)
 
     if matches:
         team_number = UI_Elements.Dropdown(
-            350, 80, 100, 40, matches[match_number.value - 1]['red'], "Team number", 24)
+            350, 80, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
+        team_number.selected_num = alliance_number - 1
+        team_number.opened = False
     else:
         team_number = UI_Elements.TextField(
-            350, 80, 60, 38, 24, title='Team Number', title_size=24)
+            350, 80, 85, 40, 30, title='Team Number', title_size=24)
 
     # Initialize data input objects and headers here, QR code lists data in order of initialization
     prematch_header = UI_Elements.Header(32, 'Prematch', 24)
@@ -128,6 +130,8 @@ config.read(os.path.basename(__file__)[0:-3] + '_config.ini')
 
 matches = list(eval(config['Matches']['match_list'])
                ) if config['Matches']['match_list'] != '' else None
+alliance_color = config['Matches']['default_alliance_color']
+alliance_number = int(config['Matches']['default_alliance_number'])
 
 Scrolling.scroll_speed = int(config['Scrolling']['scroll_speed'])
 Scrolling.display_height = int(config['Scrolling']['display_height'])
@@ -169,7 +173,6 @@ next_rect = pg.Rect(
     action_buttons_pos[0] + generate_render.get_width() * 1.2, action_buttons_pos[1], next_render.get_width() * 1.1, action_buttons_size)
 
 show_next = False
-print("show_next start")
 
 def compileData(seperator: str = ',') -> str:
     data = ''
@@ -179,7 +182,7 @@ def compileData(seperator: str = ',') -> str:
         if type(element).__name__ == "Dropdown":
             data += element.selected_str + seperator
         if type(element).__name__ == "TextField":
-            data += element.get_string().replace(",", "■") + seperator
+            data += element.get_string().replace(seperator, "﹐") + seperator
     return data[:len(data) - len(seperator)]
 
 
@@ -245,6 +248,9 @@ def drawBackground(screen_w, screen_h):
 def drawDisplay(screen_w, screen_h, show_next):
     # print(f'drawing {show_next}', end=', ')
     drawBackground(screen_w, screen_h)
+    
+    if matches:
+        WIN.blit(pg.font.SysFont('arial', int(team_number.height / 1.1)).render(f"Alliance number {team_number.selected_num + 1}", 1, (180, 180, 180)), (team_number.x + team_number.width + 10, team_number.y - 2))
 
     for counter in UI_Elements.Counter.counter_list:
         counter.draw()
