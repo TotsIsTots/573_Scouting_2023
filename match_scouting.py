@@ -25,6 +25,9 @@ def main():
 
     # Initialize data input objects and headers here, QR code lists data in order of initialization
     prematch_header = UI_Elements.Header(32, 'Prematch', 24)
+    
+    start_position_image = UI_Elements.ImageArray(550, 70, 164, 183, ['assets/red side.png', 'assets/blue side.png'], title='Starting Position', title_size=24, linked_object=team_color)
+    start_positions = UI_Elements.MultiCheckmark([UI_Elements.Checkmark(625, 80, '', 32), UI_Elements.Checkmark(625, 145, '', 32), UI_Elements.Checkmark(625, 210, '', 32)])
 
     auton_header = UI_Elements.Header(270, 'Autonomous', 24)
 
@@ -38,6 +41,7 @@ def main():
 
     a_charging_station = UI_Elements.Dropdown(
         590, 305, 100, 32, ['No', 'Docked', 'Engaged'], 'Charging Station', 20)
+    a_charging_station_example = UI_Elements.ImageArray(700, 305, 120, 120, ['assets/empty.png', 'assets/docked.png', 'assets/engaged.png'], linked_object=a_charging_station)
     a_left_community = UI_Elements.Checkmark(590, 450, 'Left Community', 32)
 
     teleop_header = UI_Elements.Header(500, 'Teleop', 24)
@@ -56,6 +60,7 @@ def main():
 
     e_charging_station = UI_Elements.Dropdown(20, 770, 150, 32, [
                                               'No', 'Parked', 'Docked', 'Engaged'], 'Charging Station/Community', 24)
+    e_charging_station_example = UI_Elements.ImageArray(180, 770, 150, 150, ['assets/empty.png', 'assets/parked.png', 'assets/docked.png', 'assets/engaged.png'], linked_object=e_charging_station)
 
     postmatch_header = UI_Elements.Header(960, 'Postmatch', 24)
 
@@ -101,19 +106,26 @@ def main():
         UI_Elements.Counter.update()
         UI_Elements.Dropdown.update()
         UI_Elements.Checkmark.update()
+        UI_Elements.MultiCheckmark.update()
         UI_Elements.TextField.update()
         team_color.update()
+        UI_Elements.ImageArray.update()
+        
 
         if matches and match_number.value > 0 and match_number.value <= len(matches):
             team_number.options = matches[match_number.value -
                                           1][team_color.value]
+            team_number.title = f'Team Number (#{team_number.selected_num + 1})'
         elif matches:
             team_number.options = ["Invalid!", "Invalid!", "Invalid!"]
+            
+            
+        if team_color.value == 'red':
+            start_position_image.x = 550
+        else:
+            start_position_image.x = 570
 
         drawDisplay(screen_w, screen_h, show_next)
-        
-        # print(f'main {show_next}')
-
 
 
 pg.font.init()
@@ -177,7 +189,7 @@ show_next = False
 def compileData(seperator: str = ',') -> str:
     data = ''
     for element in UI_Elements.list:
-        if type(element).__name__ == "Counter" or type(element).__name__ == "Checkmark" or type(element).__name__ == "TeamColorToggle":
+        if type(element).__name__ == "Counter" or type(element).__name__ == "Checkmark" or type(element).__name__ == "MultiCheckmark" or type(element).__name__ == "TeamColorToggle":
             data += str(element.value) + seperator
         if type(element).__name__ == "Dropdown":
             data += element.selected_str + seperator
@@ -193,6 +205,9 @@ def nextMatch():
                 element.value = 0
         if type(element).__name__ == "Checkmark":
             element.value = False
+        if type(element).__name__ == "MultiCheckmark":
+            for checkmark in element.checkmark_list:
+                checkmark.value = False
         if type(element).__name__ == "Dropdown":
             if element != team_number:
                 element.selected_num = -1
@@ -208,25 +223,29 @@ def nextMatch():
 
 
 def handleScrolling(scroll_change):
-    for header in UI_Elements.Header.header_list:
-        header.y -= scroll_change
-    for counter in UI_Elements.Counter.counter_list:
-        counter.y -= scroll_change
-    for checkmark in UI_Elements.Checkmark.checkmark_list:
-        checkmark.y -= scroll_change
-    for dropdown in UI_Elements.Dropdown.dropdown_list:
-        dropdown.y -= scroll_change
-    for textField in UI_Elements.TextField.textField_list:
-        textField.y -= scroll_change
-    team_color.y -= scroll_change
+    for element in UI_Elements.list:
+        if type(element) != UI_Elements.MultiCheckmark:
+            element.y -= scroll_change
+    for multiCheckmark in UI_Elements.MultiCheckmark.multiCheckmark_list:
+        for checkmark in multiCheckmark.checkmark_list:
+            checkmark.y -= scroll_change
+    # for header in UI_Elements.Header.header_list:
+    #     header.y -= scroll_change
+    # for counter in UI_Elements.Counter.counter_list:
+    #     counter.y -= scroll_change
+    # for checkmark in UI_Elements.Checkmark.checkmark_list:
+    #     checkmark.y -= scroll_change
+    # for dropdown in UI_Elements.Dropdown.dropdown_list:
+    #     dropdown.y -= scroll_change
+    # for textField in UI_Elements.TextField.textField_list:
+    #     textField.y -= scroll_change
+    # team_color.y -= scroll_change
 
     generate_rect.y -= scroll_change
     next_rect.y -= scroll_change
 
 
 def handleActionInputs(event, show_next):
-    # try: print(f'click {show_next}', end=', ')
-    # except UnboundLocalError: print('click show_next nonexist', end=', ')
     if event.type == pg.MOUSEBUTTONDOWN and pg.mouse.get_pressed()[0]:
         mouse_pos = pg.mouse.get_pos()
         if generate_rect.collidepoint(mouse_pos):
@@ -246,16 +265,16 @@ def drawBackground(screen_w, screen_h):
 
 
 def drawDisplay(screen_w, screen_h, show_next):
-    # print(f'drawing {show_next}', end=', ')
     drawBackground(screen_w, screen_h)
     
-    if matches:
-        WIN.blit(pg.font.SysFont('arial', int(team_number.height / 1.1)).render(f"Alliance number {team_number.selected_num + 1}", 1, (180, 180, 180)), (team_number.x + team_number.width + 10, team_number.y - 2))
-
+    for image in UI_Elements.ImageArray.imageArrayList:
+        image.draw()
     for counter in UI_Elements.Counter.counter_list:
         counter.draw()
     for checkmark in UI_Elements.Checkmark.checkmark_list:
         checkmark.draw()
+    # for multiCheckmark in UI_Elements.MultiCheckmark.multiCheckmark_list:
+    #     multiCheckmark.draw()
     for dropdown in UI_Elements.Dropdown.dropdown_list:
         dropdown.draw()
     for textField in UI_Elements.TextField.textField_list:

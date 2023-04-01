@@ -40,6 +40,7 @@ class Header:
         self.color = color
 
         Header.header_list.append(self)
+        list.append(self)
 
     def draw(self):
         pg.draw.line(win, self.color, (10, self.y), (pg.display.get_surface(
@@ -355,6 +356,32 @@ class Checkmark:
             elif c.check_placement == 'r':
                 c.box.y = c.y + ((c.title_render.get_height() - c.size) / 2)
 
+class MultiCheckmark:
+    multiCheckmark_list = []
+
+    def __init__(self, checkmark_list: list):
+       
+        self.checkmark_list = checkmark_list
+       
+        for checkmark in self.checkmark_list:
+            list.remove(checkmark)
+        
+        self.value = None
+
+        MultiCheckmark.multiCheckmark_list.append(self)
+        list.append(self)
+        
+    def update():
+        for multiCheckmark in MultiCheckmark.multiCheckmark_list:
+            if not(any(checkmark.value for checkmark in multiCheckmark.checkmark_list)):
+                multiCheckmark.value = None
+            for checkmark in multiCheckmark.checkmark_list:
+                if checkmark.value:
+                    if not(multiCheckmark.checkmark_list.index(checkmark) == multiCheckmark.value):
+                        multiCheckmark.value = multiCheckmark.checkmark_list.index(checkmark)
+                        for checkmark2 in multiCheckmark.checkmark_list:
+                            checkmark2.value = False
+                        checkmark.value = True
 
 class TextField:
     textField_list = []
@@ -650,3 +677,66 @@ class TeamColorToggle:
         elif self.box_placement == 'r':
             self.box.y = self.y + \
                 ((self.title_render.get_height() - self.size) / 2)
+
+
+class ImageArray:
+    imageArrayList = []
+    
+    def __init__(self, x: float, y: float, width: int, height: int, image_path_list: list, title: str = '', title_size: int = 14, default_image: int = 0, linked_object: object = None):
+        assert type(linked_object) in [Dropdown, TeamColorToggle, None], 'linked_object must be a Dropdown, TeamColorToggle, or None'
+        
+        self.x, self.y = x, y
+        self.width, self.height = width, height
+        self.image_path_list = image_path_list
+        self.image_list = []
+        for path in self.image_path_list:
+            self.image_list.append(pg.transform.scale(
+            pg.image.load(path), (self.width, self.height)))
+        self.image = self.image_list[default_image]
+        self.image_index = default_image
+        
+        self.linked_object = linked_object
+        if linked_object != None:
+            if type(linked_object) == Dropdown:
+                self.image_index = linked_object.selected_num
+            if type(linked_object) == TeamColorToggle:
+                if self.linked_object.value == 'red':
+                    self.image_index = 0
+                elif self.linked_object.value == 'blue':
+                    self.image_index = 1
+                    
+        self.title = title
+        if title != '':
+            self.title_size = title_size
+            self.title_color = (180, 180, 180)
+            self.title_font = pg.font.SysFont('arial', title_size)
+            self.title_render = self.title_font.render(
+                title, 1, self.title_color)
+            self.title_x, self.title_y = x, y - (title_size * 1.1)
+                    
+
+        list.append(self)
+        ImageArray.imageArrayList.append(self)
+    
+    def draw(self):
+        if self.image_index != -1:
+            win.blit(self.image, (self.x, self.y))
+        if self.title != '':
+            win.blit(self.title_render, (self.title_x, self.title_y))
+    
+    def update():
+        for imageArray in ImageArray.imageArrayList: 
+            if imageArray.linked_object != None:
+                if type(imageArray.linked_object) == Dropdown:
+                    imageArray.image_index = imageArray.linked_object.selected_num
+                if type(imageArray.linked_object) == TeamColorToggle:
+                    if imageArray.linked_object.value == 'red':
+                        imageArray.image_index = 0
+                    elif imageArray.linked_object.value == 'blue':
+                        imageArray.image_index = 1
+            imageArray.image = imageArray.image_list[imageArray.image_index]
+            
+            if imageArray.title != '':
+                imageArray.title_y = imageArray.y - (imageArray.title_size * 1.1)
+                imageArray.title_render = imageArray.title_font.render(
+                    imageArray.title, 1, imageArray.title_color)

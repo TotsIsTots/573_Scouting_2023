@@ -207,19 +207,54 @@ When called on a TextField object, it will return a single string of the compile
 - value: str = 'red'
 
 ## Field Initialization
-Examples of initialization can be found in the main function.
+Initialization of the fields we use can be found in the main function.
 ```
 [...]
     # Initialize data input objects and headers here, QR code lists data in order of initialization
-    header_example = UI_Elements.Header(32, 'Game time!', 24)
+    prematch_header = UI_Elements.Header(32, 'Prematch', 24)
 
-    dropdown_example = UI_Elements.Dropdown(
-        20, 300, 256, 64, ["1", "two", "0011", "IV", "0x05"], "Number", 32)
+    auton_header = UI_Elements.Header(270, 'Autonomous', 24)
 
-    check_example = UI_Elements.Checkmark(350, 50, "Water game?", 64)
+    a_top_cone = UI_Elements.Counter(20, 300, 48, 0, 'Top cones', 24, 'r')
+    a_mid_cone = UI_Elements.Counter(20, 350, 48, 0, 'Mid cones', 24, 'r')
+    a_bot_cone = UI_Elements.Counter(20, 400, 48, 0, 'Bot cones', 24, 'r')
 
-    text_field_example = UI_Elements.TextField(
-        350, 180, 256, 128, 24, title='Notes', title_size=24)
+    a_top_cube = UI_Elements.Counter(300, 300, 48, 0, 'Top cubes', 24, 'r')
+    a_mid_cube = UI_Elements.Counter(300, 350, 48, 0, 'Mid cubes', 24, 'r')
+    a_bot_cube = UI_Elements.Counter(300, 400, 48, 0, 'Bot cubes', 24, 'r')
+
+    a_charging_station = UI_Elements.Dropdown(
+        590, 305, 100, 32, ['No', 'Docked', 'Engaged'], 'Charging Station', 20)
+    a_left_community = UI_Elements.Checkmark(590, 450, 'Left Community', 32)
+
+    teleop_header = UI_Elements.Header(500, 'Teleop', 24)
+
+    t_top_cone = UI_Elements.Counter(20, 530, 48, 0, 'Top cones', 24, 'r')
+    t_mid_cone = UI_Elements.Counter(20, 580, 48, 0, 'Mid cones', 24, 'r')
+    t_bot_cone = UI_Elements.Counter(20, 630, 48, 0, 'Bot cones', 24, 'r')
+
+    t_top_cube = UI_Elements.Counter(300, 530, 48, 0, 'Top cubes', 24, 'r')
+    t_mid_cube = UI_Elements.Counter(300, 580, 48, 0, 'Mid cubes', 24, 'r')
+    t_bot_cube = UI_Elements.Counter(300, 630, 48, 0, 'Bot cubes', 24, 'r')
+
+    links_scored = UI_Elements.Counter(590, 550, 48, 0, 'Links Scored', 24)
+
+    endgame_header = UI_Elements.Header(730, 'Endgame', 24)
+
+    e_charging_station = UI_Elements.Dropdown(20, 770, 150, 32, [
+                                              'No', 'Parked', 'Docked', 'Engaged'], 'Charging Station/Community', 24)
+
+    postmatch_header = UI_Elements.Header(960, 'Postmatch', 24)
+
+    penalties = UI_Elements.Checkmark(20, 1000, 'Penalties?', 32)
+
+    breakdown = UI_Elements.Checkmark(20, 1050, 'Robot Breakdown?', 32)
+
+    defense = UI_Elements.Dropdown(20, 1130, 380, 40, [
+                                   "Didn't Play", "Played Poorly", "Played Some Well", "Completely Played Very Well"], 'Defense', 24)
+
+    comments = UI_Elements.TextField(
+        420, 1000, 330, 300, 24, title='Comments/Breakdown Details', title_size=24)
 [...]
 ```
 Indents under examples are just formatting and are not required, it can all be on one line.
