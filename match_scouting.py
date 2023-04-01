@@ -90,10 +90,6 @@ def main():
             UI_Elements.Checkmark.handleInput(event)
             UI_Elements.Counter.handleInput(event)
             team_color.handleInput(event)
-            
-            # if F11 is pressed, toggle fullscreen
-            if event.type == pg.KEYDOWN and event.key == pg.K_F11:
-                pg.display.toggle_fullscreen()
 
 
             # Generate and Reset buttons
