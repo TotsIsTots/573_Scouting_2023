@@ -4,7 +4,7 @@ This repository serves as a template for making data input fields for scouting i
 
 Data from the QR codes can be handled however it is needed, but we are working on an android app solution to do this for you, putting the data in a .csv file. It can be found [here](https://github.com/PIPIPIG233666/scouting_app) (work in progress).
 
-The data will come out in this order: match number, team color, team number, auton top cones, auton middle cones, auton bottom cones, auton top cubes, auton middle cubes, auton bottom cubes, auton charging station status, auton left community, teleop top cones, teleop middle cones, teleop bottom cones, teleop top cubes, teleop middle cubes, teleop bottom cubes, links scored, endgame charging station/community status, penalties, breakdown, defense, comments/defense description
+The data will come out in this order: match number, team color, team number, start position, auton top cones, auton middle cones, auton bottom cones, auton top cubes, auton middle cubes, auton bottom cubes, auton charging station status, auton left community, teleop top cones, teleop middle cones, teleop bottom cones, teleop top cubes, teleop middle cubes, teleop bottom cubes, links scored, endgame charging station/community status, penalties, breakdown, defense, comments/defense description
 
 ## Installation and Running
 Python is required for running. If it is not already installed, you can download and install it from [here](https://www.python.org/downloads/). When installing, make sure to select "Add Python 3.xx to PATH" when prompted.
@@ -72,7 +72,7 @@ This is would it would look like for the 2022 Michigan Escanaba event, shown [he
 Alternitively, you can run "teamfinder.py" with an internet connection. When running, it will prompt you for an event code. This is the code that is used in the URL for the event on The Blue Alliance. For example, the event code for the 2022 Michigan Escanaba event is "2022miesc". You can find the event code by going to the event on The Blue Alliance and copying the last part of the URL. It will look something like this: "https://www.thebluealliance.com/event/2022miesc". The event code is the part after the last "/". In this case, it is "2022miesc". It will then copy the formatted qualification matches to your clipboard, so you can paste it into the config file.
 
 
-## Input Fields
+## Input/Display Fields
 Every input field has values that can be changed at and/or after initialization. They are listed here with their variable types. if there is an "=" after a value, it is optional and a default value is listed. Obviously, a value defined at initialization is already defined for after initialization. Each has methods, all include an update(), draw(self), and handleInput() methods which are already handled in the code and will not be listed here. The TextField object has a special method listed below.
 
 ### Header
@@ -156,6 +156,11 @@ Every input field has values that can be changed at and/or after initialization.
 - box_color: tuple = (255, 255, 255)
 - box_border_color: tuple = (0, 0, 0)
 - value: bool = False
+
+### MultiCheckmark
+**At initialization:**
+- checkmarks: list (of [Checkmark](#checkmark) objects)
+
 
 ### TextField
 **At initialization:**
