@@ -69,7 +69,7 @@ def main():
     breakdown = UI_Elements.Checkmark(20, 1050, 'Robot Breakdown?', 32)
 
     defense = UI_Elements.Dropdown(20, 1130, 380, 40, [
-                                   "Didn't Play", "Played Poorly", "Played Some Well", "Completely Played Very Well"], 'Defense', 24)
+                                   "Didn't Play Defense", "Played Defense Poorly", "Played Some Defense Well", "All Defense Very Well"], 'Defense', 24)
 
     comments = UI_Elements.TextField(
         420, 1000, 330, 300, 24, title='Comments/Breakdown Details', title_size=24)
@@ -90,6 +90,10 @@ def main():
             UI_Elements.Checkmark.handleInput(event)
             UI_Elements.Counter.handleInput(event)
             team_color.handleInput(event)
+            
+            # if F11 is pressed, toggle fullscreen
+            if event.type == pg.KEYDOWN and event.key == pg.K_F11:
+                pg.display.toggle_fullscreen()
 
 
             # Generate and Reset buttons
