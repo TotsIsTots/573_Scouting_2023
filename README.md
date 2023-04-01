@@ -213,6 +213,23 @@ When called on a TextField object, it will return a single string of the compile
 - box_border_color: tuple = (180, 180, 180)
 - value: str = 'red'
 
+### ImageArray
+**At initialization:**
+- x: float
+- y: float
+- width: int
+- height: int
+- image_path_list: list (of str)
+- title: str = ''
+- title_size: int = 14
+- default_image: int = 0
+- linked_object: [TeamColorToggle](#teamcolortoggle) or [Dropdown](#dropdown) = None
+
+**After initialization:**
+- y: float
+- title: str = ''
+- image_path_list: list (of str)
+
 ## Field Initialization
 Initialization of the fields we use can be found in the main function.
 ```
