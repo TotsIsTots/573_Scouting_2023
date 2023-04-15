@@ -5,7 +5,6 @@ from datetime import date
 import os
 import configparser
 
-clock = pg.time.Clock()
 
 def main():
     # it is HIGHLY reccomended that these exist, but you can change parameters such as size, position etc.
@@ -131,9 +130,6 @@ def main():
             start_position_image.x = 570
 
         drawDisplay(screen_w, screen_h, show_next)
-        
-        print(clock.get_fps())
-        clock.tick()
 
 
 pg.font.init()
