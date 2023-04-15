@@ -67,12 +67,14 @@ def main():
     penalties = UI_Elements.Checkmark(20, 1000, 'Penalties?', 32)
 
     breakdown = UI_Elements.Checkmark(20, 1050, 'Robot Breakdown?', 32)
+    
+    tip = UI_Elements.Checkmark(420, 1000, 'Robot Tipped?', 32)
 
     defense = UI_Elements.Dropdown(20, 1130, 380, 40, [
                                    "Didn't Play Defense", "Played Defense Poorly", "Played Some Defense Well", "All Defense Very Well"], 'Defense', 24)
 
     comments = UI_Elements.TextField(
-        420, 1000, 330, 300, 24, title='Comments/Breakdown Details', title_size=24)
+        420, 1080, 330, 300, 24, title='Comments/Breakdown Details', title_size=24)
 
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
     #!!!===                 It is not reccomended to change anything below this line.                       ===!!!
