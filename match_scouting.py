@@ -5,6 +5,7 @@ from datetime import date
 import os
 import configparser
 
+clock = pg.time.Clock()
 
 def main():
     # it is HIGHLY reccomended that these exist, but you can change parameters such as size, position etc.
@@ -118,6 +119,8 @@ def main():
             team_number.options = matches[match_number.value -
                                           1][team_color.value]
             team_number.title = f'Team Number (#{team_number.selected_num + 1})'
+            team_number.title_render = team_number.title_font.render(
+                team_number.title, True, team_number.title_color)
         elif matches:
             team_number.options = ["Invalid!", "Invalid!", "Invalid!"]
             
@@ -128,6 +131,9 @@ def main():
             start_position_image.x = 570
 
         drawDisplay(screen_w, screen_h, show_next)
+        
+        print(clock.get_fps())
+        clock.tick()
 
 
 pg.font.init()

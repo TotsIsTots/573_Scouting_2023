@@ -48,8 +48,9 @@ class Header:
         win.blit(self.title_render, (10, self.y - self.size))
 
     def update():
-        for h in Header.header_list:
-            h.title_render = h.title_font.render(h.title, 1, h.color)
+        # for h in Header.header_list:
+        #     h.title_render = h.title_font.render(h.title, 1, h.color)
+        pass
 
 
 class Counter:
@@ -124,8 +125,8 @@ class Counter:
         for counter in Counter.counter_list:
             # title render, if there is one
             if counter.title != "":
-                counter.title_render = counter.title_font.render(
-                    str(counter.title), 1, counter.title_font_color)
+                # counter.title_render = counter.title_font.render(
+                #     str(counter.title), 1, counter.title_font_color)
                 if counter.title_placement == 'u':
                     counter.title_render_x, counter.title_render_y = counter.x, counter.y - \
                         counter.title_render.get_height() - (counter.size * 0.05)
@@ -197,8 +198,8 @@ class Dropdown:
     def draw(self):
         # draws title, if there is one
         if self.title != "":
-            self.title_render = self.title_font.render(
-                self.title, 1, self.title_color)
+            # self.title_render = self.title_font.render(
+            #     self.title, 1, self.title_color)
             win.blit(self.title_render, (self.x, self.y -
                      self.title_render.get_height() - (self.height * 0.05)))
 
@@ -258,14 +259,14 @@ class Dropdown:
                 dropdown.selected_str = ""
             else:
                 dropdown.selected_str = dropdown.options[dropdown.selected_num]
-            dropdown.option_renders = []
+            # dropdown.option_renders = []
 
             # updates option renders
-            for option in dropdown.options:
-                dropdown.option_renders.append(
-                    dropdown.font.render(option, 1, dropdown.font_color))
-            dropdown.title_render = dropdown.title_render = dropdown.title_font.render(
-                dropdown.title, 1, dropdown.title_color)
+            # for option in dropdown.options:
+            #     dropdown.option_renders.append(
+            #         dropdown.font.render(option, 1, dropdown.font_color))
+            # dropdown.title_render = dropdown.title_font.render(
+            #     dropdown.title, 1, dropdown.title_color)
 
 
 class Checkmark:
@@ -341,10 +342,10 @@ class Checkmark:
     def update():
         for c in Checkmark.checkmark_list:
             c.title_font = pg.font.SysFont('arial', c.size)
-            c.title_render = c.title_font.render(c.title, 1, c.title_color)
+            # c.title_render = c.title_font.render(c.title, 1, c.title_color)
             c.box.thickness = c.box_thickness
-            c.check = pg.transform.smoothscale(
-                c.check, (c.size - (c.box_thickness * 2), c.size - (c.box_thickness * 2)))
+            # c.check = pg.transform.smoothscale(
+            #     c.check, (c.size - (c.box_thickness * 2), c.size - (c.box_thickness * 2)))
 
             # updates y values (for scrolling)
             if c.check_placement == 'u':
@@ -581,8 +582,8 @@ class TextField:
             # updates title, if there is one
             if t.title != '':
                 t.title_y = t.y - (t.title_size * 1.1)
-                t.title_render = t.title_font.render(
-                    t.title, 1, t.title_color)
+                # t.title_render = t.title_font.render(
+                #     t.title, 1, t.title_color)
 
             # sets box y and field y equal (for scrolling)
             t.box.y = t.y
@@ -661,9 +662,9 @@ class TeamColorToggle:
                     self.box_color = (255, 0, 0)
 
     def update(self):
-        self.title_font = pg.font.SysFont('arial', self.size)
-        self.title_render = self.title_font.render(
-            self.title, 1, self.title_color)
+        # self.title_font = pg.font.SysFont('arial', self.size)
+        # self.title_render = self.title_font.render(
+        #     self.title, 1, self.title_color)
         self.box.thickness = self.box_thickness
 
         # updates y values (for scrolling)
@@ -738,5 +739,5 @@ class ImageArray:
             
             if imageArray.title != '':
                 imageArray.title_y = imageArray.y - (imageArray.title_size * 1.1)
-                imageArray.title_render = imageArray.title_font.render(
-                    imageArray.title, 1, imageArray.title_color)
+                # imageArray.title_render = imageArray.title_font.render(
+                #     imageArray.title, 1, imageArray.title_color)

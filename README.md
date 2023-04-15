@@ -88,7 +88,6 @@ Every input field has values that can be changed at and/or after initialization.
 
 **After Initialization:**
 - y: float
-- title: str
 - size: int
 - thickness: float = 2
 - color: tuple = (180, 180, 180)
@@ -100,17 +99,11 @@ Every input field has values that can be changed at and/or after initialization.
 - y: float
 - size: int
 - value: int = 0
-- title: str = ""
-- title_size: int = 14
 
 **After Initialization:**
 - x: float
 - y: float
-- value: int = 0
-- title_font: [pygame.font.SysFont](https://www.pygame.org/docs/ref/font.html#pygame.font.SysFont) = pg.font.SysFont('arial', title_size)
-- title_font_color: tuple = (180, 180, 180)
-- font: [pygame.font.SysFont](https://www.pygame.org/docs/ref/font.html#pygame.font.SysFont) = pg.font.SysFont('arial', size)
-- font_color: tuple = (180, 180, 180) 
+- value: int = 0 
 
 ### Dropdown
 **At initialization:**
@@ -128,18 +121,12 @@ Every input field has values that can be changed at and/or after initialization.
 - y: float
 - width: float
 - height: float
-- options: list (of str)
 - selected_num = -1
 - opened: bool = 0
 - border_thickness: float = 4
 - inner_border_thickness: float = 2
 - border_color: tuple = (180, 180, 180)
 - background_color: tuple = (20, 20, 20)
-- font: [pygame.font.SysFont](https://www.pygame.org/docs/ref/font.html#pygame.font.SysFont) = pg.font.SysFont('arial', height - (border_thickness * 2))
-- font_color: tuple = (180, 180, 180)
-- title: str = ""
-- title_color: tuple = (180, 180, 180)
-- title_font: [pygame.font.SysFont](https://www.pygame.org/docs/ref/font.html#pygame.font.SysFont) = pg.font.SysFont('arial', title_size)
 
 ### Checkmark
 **At initialization:**
@@ -178,9 +165,6 @@ Every input field has values that can be changed at and/or after initialization.
 **After initialization:**
 - y: float
 - height: float
-- title: str = ''
-- title_color: tuple = (180, 180, 180)
-- title_font: [pygame.font.SysFont](https://www.pygame.org/docs/ref/font.html#pygame.font.SysFont) = pg.font.SysFont('arial', title_size)
 - font_color: tuple = (180, 180, 180)
 - font: [pygame.font.SysFont](https://www.pygame.org/docs/ref/font.html#pygame.font.SysFont) = pg.font.SysFont('arial', text_size)
 - content: list (of str) = ['']
@@ -205,9 +189,6 @@ When called on a TextField object, it will return a single string of the compile
 
 **After initialization:**
 - y: float
-- title: str
-- title_color: tuple = (180, 180, 180)
-- title_font: [pygame.font.SysFont](https://www.pygame.org/docs/ref/font.html#pygame.font.SysFont) = pg.font.SysFont('arial', size)
 - box_thickness: float = 4
 - box_color: tuple = (255, 0, 0)
 - box_border_color: tuple = (180, 180, 180)
@@ -227,7 +208,6 @@ When called on a TextField object, it will return a single string of the compile
 
 **After initialization:**
 - y: float
-- title: str = ''
 - image_path_list: list (of str)
 
 ## Field Initialization
