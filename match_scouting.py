@@ -117,12 +117,15 @@ def main():
         if matches and match_number.value > 0 and match_number.value <= len(matches):
             team_number.options = matches[match_number.value -
                                           1][team_color.value]
+            team_number.option_renders = []
+            for number in team_number.options:
+                team_number.option_renders.append(team_number.font.render(number, 1, team_number.font_color))
             team_number.title = f'Team Number (#{team_number.selected_num + 1})'
             team_number.title_render = team_number.title_font.render(
                 team_number.title, True, team_number.title_color)
         elif matches:
             team_number.options = ["Invalid!", "Invalid!", "Invalid!"]
-            
+
             
         if team_color.value == 'red':
             start_position_image.x = 550
