@@ -24,7 +24,7 @@ def main():
             350, 160, 85, 40, 30, title='Team Number', title_size=24)
 
     # Initialize data input objects and headers here, QR code lists data in order of initialization
-    beginning_header = UI_Elements.Header(y=60, title="Basic Information", size=60, thickness=1, bold=False, color=(206, 50, 209))
+   # beginning_header = UI_Elements.Header(y=60, title="Basic Information", size=60, thickness=1, bold=False, color=(206, 50, 209))
     amt_balls_scored = UI_Elements.Counter(20, 200, 48, 0, 'Balls Scored?', 24, 'r')
     amt_laps_scored = UI_Elements.Counter(20, 250, 48, 0, 'Laps Scored?', 24, 'r')
     defense = UI_Elements.Dropdown(20, 350, 380, 30, [
