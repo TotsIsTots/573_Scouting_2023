@@ -21,61 +21,18 @@ def main():
         team_number.opened = False
     else:
         team_number = UI_Elements.TextField(
-            350, 80, 85, 40, 30, title='Team Number', title_size=24)
+            350, 160, 85, 40, 30, title='Team Number', title_size=24)
 
     # Initialize data input objects and headers here, QR code lists data in order of initialization
-    prematch_header = UI_Elements.Header(32, 'Prematch', 24)
-    
-    start_position_image = UI_Elements.ImageArray(550, 70, 164, 183, ['assets/red side.png', 'assets/blue side.png'], title='Starting Position', title_size=24, linked_object=team_color)
-    start_positions = UI_Elements.MultiCheckmark([UI_Elements.Checkmark(625, 80, '', 32), UI_Elements.Checkmark(625, 145, '', 32), UI_Elements.Checkmark(625, 210, '', 32)])
-
-    auton_header = UI_Elements.Header(270, 'Autonomous', 24)
-
-    a_top_cone = UI_Elements.Counter(20, 300, 48, 0, 'Top cones', 24, 'r')
-    a_mid_cone = UI_Elements.Counter(20, 350, 48, 0, 'Mid cones', 24, 'r')
-    a_bot_cone = UI_Elements.Counter(20, 400, 48, 0, 'Bot cones', 24, 'r')
-
-    a_top_cube = UI_Elements.Counter(300, 300, 48, 0, 'Top cubes', 24, 'r')
-    a_mid_cube = UI_Elements.Counter(300, 350, 48, 0, 'Mid cubes', 24, 'r')
-    a_bot_cube = UI_Elements.Counter(300, 400, 48, 0, 'Bot cubes', 24, 'r')
-
-    a_charging_station = UI_Elements.Dropdown(
-        590, 305, 100, 32, ['No', 'Docked', 'Engaged'], 'Charging Station', 20)
-    a_charging_station_example = UI_Elements.ImageArray(700, 305, 120, 120, ['assets/empty.png', 'assets/docked.png', 'assets/engaged.png'], linked_object=a_charging_station)
-    a_left_community = UI_Elements.Checkmark(590, 450, 'Left Community', 32)
-
-    teleop_header = UI_Elements.Header(500, 'Teleop', 24)
-
-    t_top_cone = UI_Elements.Counter(20, 530, 48, 0, 'Top cones', 24, 'r')
-    t_mid_cone = UI_Elements.Counter(20, 580, 48, 0, 'Mid cones', 24, 'r')
-    t_bot_cone = UI_Elements.Counter(20, 630, 48, 0, 'Bot cones', 24, 'r')
-
-    t_top_cube = UI_Elements.Counter(300, 530, 48, 0, 'Top cubes', 24, 'r')
-    t_mid_cube = UI_Elements.Counter(300, 580, 48, 0, 'Mid cubes', 24, 'r')
-    t_bot_cube = UI_Elements.Counter(300, 630, 48, 0, 'Bot cubes', 24, 'r')
-
-    links_scored = UI_Elements.Counter(590, 550, 48, 0, 'Links Scored', 24)
-
-    endgame_header = UI_Elements.Header(730, 'Endgame', 24)
-
-    e_charging_station = UI_Elements.Dropdown(20, 770, 150, 32, [
-                                              'No', 'Parked', 'Docked', 'Engaged'], 'Charging Station/Community', 24)
-    e_charging_station_example = UI_Elements.ImageArray(180, 770, 150, 150, ['assets/empty.png', 'assets/parked.png', 'assets/docked.png', 'assets/engaged.png'], linked_object=e_charging_station)
-
-    postmatch_header = UI_Elements.Header(960, 'Postmatch', 24)
-
-    penalties = UI_Elements.Checkmark(20, 1000, 'Penalties?', 32)
-
-    breakdown = UI_Elements.Checkmark(20, 1050, 'Robot Breakdown?', 32)
-    
-    tip = UI_Elements.Checkmark(420, 1000, 'Robot Tipped?', 32)
-
-    defense = UI_Elements.Dropdown(20, 1130, 380, 40, [
-                                   "Didn't Play Defense", "Played Defense Poorly", "Played Some Defense Well", "All Defense Very Well"], 'Defense', 24)
-
-    comments = UI_Elements.TextField(
-        420, 1080, 330, 300, 24, title='Comments/Breakdown Details', title_size=24)
-
+    beginning_header = UI_Elements.Header(y=60, title="Basic Information", size=60, thickness=1, bold=False, color=(206, 50, 209))
+    amt_balls_scored = UI_Elements.Counter(20, 200, 48, 0, 'Balls Scored?', 24, 'r')
+    amt_laps_scored = UI_Elements.Counter(20, 250, 48, 0, 'Laps Scored?', 24, 'r')
+    defense = UI_Elements.Dropdown(20, 350, 380, 30, [
+                                   "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great"], 'Defense', 20)
+    notes = UI_Elements.TextField(x=20, y=620, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
+    ending_header = UI_Elements.Header(y=800, title="Endgame", size=60, thickness=1, bold=False, color=(206, 50, 209))
+   # Robot_notes = UI_Elements.TextField(x=20, y=700, width=400, height=100, text_size=20, border_thickness=5, title='Robot Specs', title_size=20)
+    #notes_Heading = UI_Elements.Header(title='Notes', y=690, size=40, thickness=1, color=(180, 180, 180), bold=True)
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
     #!!!===                 It is not reccomended to change anything below this line.                       ===!!!
 
@@ -126,11 +83,6 @@ def main():
         elif matches:
             team_number.options = ["Invalid!", "Invalid!", "Invalid!"]
 
-            
-        if team_color.value == 'red':
-            start_position_image.x = 550
-        else:
-            start_position_image.x = 570
 
         drawDisplay(screen_w, screen_h, show_next)
 
@@ -183,7 +135,7 @@ pg.display.set_icon(icon)
 BACKGROUND = pg.image.load(background_path)
 BACKGROUND_W, BACKGROUND_H = BACKGROUND.get_size()
 
-action_font = pg.font.SysFont('arial', action_buttons_size)
+action_font = pg.font.Font("Assets\MinecraftTen-VGORe.ttf", action_buttons_size)
 generate_render = action_font.render('Generate', 1, generate_text_color)
 generate_rect = pg.Rect(
     action_buttons_pos[0], action_buttons_pos[1], generate_render.get_width() * 1.1, action_buttons_size)
