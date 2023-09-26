@@ -56,7 +56,7 @@ class Header:
 class Counter:
     counter_list = []
 
-    def __init__(self, x: float, y: float, size: int, value: int = 0, title: str = "", title_size: int = 14, title_placement: str = "u"):
+    def __init__(self, x: float, y: float, size: int, value: int = 0, title: str = "", title_size: int = 32, title_placement: str = "u"):
         assert title_placement in [
             'u',  'r'], 'title_placement parameter must be u or r'
         self.title_placement = title_placement

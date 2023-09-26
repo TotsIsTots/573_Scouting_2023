@@ -10,27 +10,36 @@ def main():
     # it is HIGHLY reccomended that these exist, but you can change parameters such as size, position etc.
     global match_number, team_color, team_number
     match_number = UI_Elements.Counter(
-        20, 80, 48, 1, "Match number", 24)
+        20, 85, 48, 1, "Match Number", 24)
 
-    team_color = UI_Elements.TeamColorToggle(200, 85, 'Color', 32, alliance_color)
+    team_color = UI_Elements.TeamColorToggle(175, 90, 'Color', 32, alliance_color)
 
     if matches:
         team_number = UI_Elements.Dropdown(
-            350, 80, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
+            375, 80, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
         team_number.selected_num = alliance_number - 1
         team_number.opened = False
     else:
         team_number = UI_Elements.TextField(
-            350, 160, 85, 40, 30, title='Team Number', title_size=24)
+            325, 90, 85, 40, 30, title='Team Number', title_size=24)
 
     # Initialize data input objects and headers here, QR code lists data in order of initialization
    # beginning_header = UI_Elements.Header(y=60, title="Basic Information", size=60, thickness=1, bold=False, color=(206, 50, 209))
-    amt_balls_scored = UI_Elements.Counter(20, 200, 48, 0, 'Balls Scored?', 24, 'r')
-    amt_laps_scored = UI_Elements.Counter(20, 250, 48, 0, 'Laps Scored?', 24, 'r')
-    defense = UI_Elements.Dropdown(20, 350, 380, 30, [
-                                   "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great"], 'Defense', 20)
+    amt_balls_scored = UI_Elements.Counter(20, 140, 48, 0, 'Balls Scored', 24, 'r')
+    amt_laps_scored = UI_Elements.Counter(20, 190, 48, 0, 'Laps Ran', 24, 'r')
+    
+    
+    ending_header = UI_Elements.Header(y=310, title="Endgame", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    
+    Balance = UI_Elements.Checkmark(20, 330, "Did It Park On The Ramp", 32)
+    
+    breakdown = UI_Elements.Checkmark(20, 380, 'Did It Breakdown', 32)
+    
+    defense = UI_Elements.Dropdown(20, 440, 380, 30, [
+                                   "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great", "Unknown"], 'Defense', title_size=32)
+    
     notes = UI_Elements.TextField(x=20, y=620, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
-    ending_header = UI_Elements.Header(y=800, title="Endgame", size=60, thickness=1, bold=False, color=(206, 50, 209))
+    
    # Robot_notes = UI_Elements.TextField(x=20, y=700, width=400, height=100, text_size=20, border_thickness=5, title='Robot Specs', title_size=20)
     #notes_Heading = UI_Elements.Header(title='Notes', y=690, size=40, thickness=1, color=(180, 180, 180), bold=True)
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
