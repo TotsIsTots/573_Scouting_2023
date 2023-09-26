@@ -35,10 +35,10 @@ def main():
     
     breakdown = UI_Elements.Checkmark(20, 380, 'Did It Breakdown', 32)
     
-    defense = UI_Elements.Dropdown(20, 440, 380, 30, [
+    defense = UI_Elements.Dropdown(20, 450, 380, 30, [
                                    "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great", "Unknown"], 'Defense', title_size=32)
     
-    notes = UI_Elements.TextField(x=20, y=620, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
+    notes = UI_Elements.TextField(x=20, y=700, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
     
    # Robot_notes = UI_Elements.TextField(x=20, y=700, width=400, height=100, text_size=20, border_thickness=5, title='Robot Specs', title_size=20)
     #notes_Heading = UI_Elements.Header(title='Notes', y=690, size=40, thickness=1, color=(180, 180, 180), bold=True)
