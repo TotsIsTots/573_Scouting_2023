@@ -21,18 +21,16 @@ def main():
 
     header = UI_Elements.Header(20, "Pit Scouting", 24)
     
-    drivetrain_type = UI_Elements.Dropdown(180, 70, 150, 40, ["Mecanum", "Swerve", "Tank", "Other"], "Drivetrain Type", 24)
+    drivetrain_type = UI_Elements.Dropdown(200, 60, 150, 40, ["Mecanum", "Tank", "omni", "other"], "Drivetrain Type", 24)
     
-    cubes = UI_Elements.Checkmark(360, 70, "Can it score cubes?", 32)
-    cones = UI_Elements.Checkmark(360, 110, "Can it score cones?", 32)
+    laps = UI_Elements.Checkmark(30, 280, "Can It Complete A Lap", 32)
+    balls = UI_Elements.Checkmark(30, 330, "Can It Score A Goal", 32)
     
-    level_1 = UI_Elements.Checkmark(360, 150, "Can it score level 1?", 32)
-    level_2 = UI_Elements.Checkmark(360, 190, "Can it score level 2?", 32)
-    level_3 = UI_Elements.Checkmark(360, 230, "Can it score level 3?", 32)
+    Park = UI_Elements.Checkmark(30, 380, "Can It Park On The Ramp", 32)
 
-    charging_station = UI_Elements.Dropdown(360, 300, 400, 40, ["Can't Balance", "Can balance", "Balance with two other robots"], "Charging station", 24)
+    Ramp_Park = UI_Elements.Dropdown(360, 300, 400, 40, ["Can't Park", "Can Park", "Park With Another Robot"], "Charging station", 24)
     
-    auton = UI_Elements.TextField(20, 300, 300, 170, 30, title='What does it do in autonomous?', title_size=24)
+   
     
     score_method = UI_Elements.TextField(20, 500, 300, 170, 30, title='How does it score?', title_size=24)
     
