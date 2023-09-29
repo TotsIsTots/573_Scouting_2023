@@ -21,20 +21,20 @@ def main():
 
     header = UI_Elements.Header(20, "Pit Scouting", 24)
     
-    drivetrain_type = UI_Elements.Dropdown(200, 60, 150, 40, ["Mecanum", "Tank", "omni", "other"], "Drivetrain Type", 24)
+    drivetrain_type = UI_Elements.Dropdown(200, 60, 150, 40, ["Mecanum", "Tank", "Omni", "Other"], "Drivetrain Type", 32)
     
     laps = UI_Elements.Checkmark(30, 280, "Can It Complete A Lap", 32)
     balls = UI_Elements.Checkmark(30, 330, "Can It Score A Goal", 32)
     
     Park = UI_Elements.Checkmark(30, 380, "Can It Park On The Ramp", 32)
 
-    Ramp_Park = UI_Elements.Dropdown(360, 300, 400, 40, ["Can't Park", "Can Park", "Park With Another Robot"], "Charging station", 24)
+    Ramp_Park = UI_Elements.Dropdown(30, 460, 400, 40, ["Can't Park", "Can Park", "Park With Another Robot"], "Ramp Parking", 32)
     
    
     
-    score_method = UI_Elements.TextField(20, 500, 300, 170, 30, title='How does it score?', title_size=24)
+    score_method = UI_Elements.TextField(30, 650, 300, 170, 30, title='How does it score?', title_size=24)
     
-    notes = UI_Elements.TextField(360, 500, 400, 220, 30, title='Comments/Special Elements', title_size=24)
+    notes = UI_Elements.TextField(30, 850, 400, 220, 30, title='Comments/Special Elements', title_size=24)
 
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
     #!!!===                 It is not reccomended to change anything below this line.                       ===!!!
