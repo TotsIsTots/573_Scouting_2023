@@ -1,5 +1,6 @@
 import pygame as pg
 import os
+import typing
 
 pg.font.init()
 
@@ -341,7 +342,7 @@ class Checkmark:
 
     def update():
         for c in Checkmark.checkmark_list:
-            c.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", size=c.size)
+            c.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", c.size)
             # c.title_render = c.title_font.render(c.title, 1, c.title_color)
             c.box.thickness = c.box_thickness
             # c.check = pg.transform.smoothscale(

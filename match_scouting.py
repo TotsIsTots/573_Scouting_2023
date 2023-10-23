@@ -161,12 +161,8 @@ def compileData(seperator: str = ',') -> str:
             data += str(element.value) + seperator
         if type(element).__name__ == "Dropdown":
             data += element.selected_str + seperator
-        if type(element).__name__ == "TextField":
-            per = element.get_string().replace("deletedatabase", "Evil! Evil! Youre Evil! Why would you ever try to do that. The Only possible explination is that you Evil!")
-            per = per.replace("cleardatabase", "Evil! Evil! Youre Evil! Why would you ever try to do that. The Only possible explination is that you Evil!")
-            per = per.replace(",", "COMMA")
-            data = data + per         
- # data += element.get_string().replace(seperator, "﹐") + seperator
+        if type(element).__name__ == "TextField":  
+            data += element.get_string().replace(seperator, ";") + seperator
     return data[:len(data) - len(seperator)]
 
 def nextMatch():
