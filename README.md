@@ -17,7 +17,7 @@ If git is installed, you can copy and paste this command to clone this repositor
 
 ## Settings
 The settings are stored in the "main_config.ini" file. It looks like this inside:
-```
+```ini
 [Matches]
 # list of event matches
 match_list = 
@@ -212,7 +212,7 @@ When called on a TextField object, it will return a single string of the compile
 
 ## Field Initialization
 Initialization of the fields we use can be found in the main function.
-```
+```python
 [...]
     # Initialize data input objects and headers here, QR code lists data in order of initialization
     prematch_header = UI_Elements.Header(32, 'Prematch', 24)
