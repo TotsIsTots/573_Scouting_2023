@@ -40,6 +40,9 @@ def main():
     
     notes = UI_Elements.TextField(x=20, y=700, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
     
+    # BEGIN: xz8f5d3g2hj7
+    
+    # END: xz8f5d3g2hj7
    # Robot_notes = UI_Elements.TextField(x=20, y=700, width=400, height=100, text_size=20, border_thickness=5, title='Robot Specs', title_size=20)
     #notes_Heading = UI_Elements.Header(title='Notes', y=690, size=40, thickness=1, color=(180, 180, 180), bold=True)
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!

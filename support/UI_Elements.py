@@ -3,6 +3,7 @@ import os
 
 pg.font.init()
 
+chosenfont = "Comic Sans MS" 
 
 def init():
     global win
@@ -431,6 +432,8 @@ class TextField:
 
         TextField.textField_list.append(self)
         list.append(self)
+        
+ 
 
     def get_string(self) -> str:
         # returns string of text field
