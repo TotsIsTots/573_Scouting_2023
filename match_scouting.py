@@ -35,7 +35,7 @@ def main():
     
     breakdown = UI_Elements.Checkmark(20, 380, 'Did It Breakdown', 32)
     
-    defense = UI_Elements.Dropdown(20, 460, 380, 30, [
+    defense = UI_Elements.Dropdown(20, 450, 380, 30, [
                                    "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great", "Unknown"], 'Defense', title_size=32)
     
     notes = UI_Elements.TextField(x=20, y=700, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
@@ -147,7 +147,7 @@ pg.display.set_icon(icon)
 BACKGROUND = pg.image.load(background_path)
 BACKGROUND_W, BACKGROUND_H = BACKGROUND.get_size()
 
-action_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", action_buttons_size)
+action_font = pg.font.Font("Assets\MinecraftTen-VGORe.ttf", action_buttons_size)
 generate_render = action_font.render('Generate', 1, generate_text_color)
 generate_rect = pg.Rect(
     action_buttons_pos[0], action_buttons_pos[1], generate_render.get_width() * 1.1, action_buttons_size)
@@ -164,9 +164,10 @@ def compileData(seperator: str = ',') -> str:
             data += str(element.value) + seperator
         if type(element).__name__ == "Dropdown":
             data += element.selected_str + seperator
-        if type(element).__name__ == "TextField":  
-            data += element.get_string().replace(seperator, ";") + seperator
+        if type(element).__name__ == "TextField":
+            data += element.get_string().replace(seperator, "﹐") + seperator
     return data[:len(data) - len(seperator)]
+
 
 def nextMatch():
     for element in UI_Elements.list:
