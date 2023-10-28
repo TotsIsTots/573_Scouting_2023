@@ -147,7 +147,7 @@ pg.display.set_icon(icon)
 BACKGROUND = pg.image.load(background_path)
 BACKGROUND_W, BACKGROUND_H = BACKGROUND.get_size()
 
-action_font = pg.font.Font("Assets\MinecraftTen-VGORe.ttf", action_buttons_size)
+action_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", action_buttons_size)
 generate_render = action_font.render('Generate', 1, generate_text_color)
 generate_rect = pg.Rect(
     action_buttons_pos[0], action_buttons_pos[1], generate_render.get_width() * 1.1, action_buttons_size)
