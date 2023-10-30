@@ -15,7 +15,7 @@ def main():
     team_color = UI_Elements.TeamColorToggle(175, 90, 'Color', 32, alliance_color)
 
     if matches:
-        team_number = UI_Elements.Dropdown(
+        team_number = UI_Elements.TextField(
             375, 80, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
         team_number.selected_num = alliance_number - 1
         team_number.opened = False
