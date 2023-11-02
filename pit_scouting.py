@@ -28,7 +28,7 @@ def main():
     
     Park = UI_Elements.Checkmark(30, 380, "Can It Park On The Ramp", 32)
 
-    Ramp_Park = UI_Elements.Dropdown(360, 300, 400, 40, ["Can't Park", "Can Park", "Park With Another Robot"], "Charging station", 24)
+    Ramp_Park = UI_Elements.Dropdown(480, 280, 400, 40, ["Can't Park", "Can Park", "Park With Another Robot"], "Charging station", 24)
     
    
     
