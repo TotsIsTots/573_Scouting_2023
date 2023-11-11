@@ -401,7 +401,7 @@ class TextField:
             self.title_color = (180, 180, 180)
             self.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", title_size)
             self.title_render = self.title_font.render(
-                title, 1, self.title_color)
+                str(title), 1, self.title_color)
             self.title_x, self.title_y = x, y - (title_size * 1.1)
 
         # define text field font and lists

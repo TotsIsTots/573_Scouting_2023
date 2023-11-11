@@ -47,7 +47,7 @@ def main():
     #notes_Heading = UI_Elements.Header(title='Notes', y=690, size=40, thickness=1, color=(180, 180, 180), bold=True)
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
     #!!!===                 It is not reccomended to change anything below this line.                       ===!!!
-
+    
     # main loop
     run = True
     while run:
