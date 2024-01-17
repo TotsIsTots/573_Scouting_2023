@@ -35,8 +35,8 @@ def main():
     second_header = UI_Elements.Header(y=350, title="Important Stuff", size=60, thickness=1, bold=False, color=(150, 150, 150))
     
     CoOp_button = UI_Elements.Checkmark(20, 370, "Did They Hit Coopertition Button?", 32)
-    hang_Chain = UI_Elements.Checkmark(20, 410, "Can It Hang On A Chain?", 32)
-    hang_side_Chain = UI_Elements.Checkmark(20, 450, "Can It Hang On A Side-Chain", 32)
+    hang_Chain = UI_Elements.Checkmark(20, 410, "Did It Hang On A Chain?", 32)
+    hang_side_Chain = UI_Elements.Checkmark(20, 450, "Did It Hang On A Side-Chain", 32)
     breakdown = UI_Elements.Checkmark(20, 490, 'Did It Breakdown?', 32)
     human_Player = UI_Elements.Checkmark(20, 530, 'Can It Pick Up From Human Player?', 32)
     ground_Pickup = UI_Elements.Checkmark(20, 570, 'Can It Pick Up From The Ground?', 32)
