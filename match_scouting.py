@@ -22,23 +22,30 @@ def main():
     else:
         team_number = UI_Elements.TextField(
             325, 90, 85, 40, 30, title='Team Number', title_size=24)
-
+        
+        
+    
+    
     # Initialize data input objects and headers here, QR code lists data in order of initialization
-   # beginning_header = UI_Elements.Header(y=60, title="Basic Information", size=60, thickness=1, bold=False, color=(206, 50, 209))
-    amt_balls_scored = UI_Elements.Counter(20, 140, 48, 0, 'Balls Scored', 24, 'r')
-    amt_laps_scored = UI_Elements.Counter(20, 190, 48, 0, 'Laps Ran', 24, 'r')
+    # beginning_header = UI_Elements.Header(y=60, title="Basic Information", size=60, thickness=1, bold=False, color=(206, 50, 209))
+    amt_amplified_scored = UI_Elements.Counter(20, 140, 48, 0, 'Ampelified-Speaker Points: ', 24, 'r')
+    amt_speaker_scored = UI_Elements.Counter(20, 190, 48, 0, 'Non-Ampelified-Speaker Points: ', 24, 'r')
+    amt_AMP_scored = UI_Elements.Counter(20, 240, 48, 0, 'AMP Points: ', 24, 'r')
+    
+    second_header = UI_Elements.Header(y=350, title="Important Stuff", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    
+    CoOp_button = UI_Elements.Checkmark(20, 370, "Did They Hit Coopertition Button?", 32)
+    hang_Chain = UI_Elements.Checkmark(20, 410, "Can It Hang On A Chain?", 32)
+    hang_side_Chain = UI_Elements.Checkmark(20, 450, "Can It Hang On A Side-Chain", 32)
+    breakdown = UI_Elements.Checkmark(20, 490, 'Did It Breakdown?', 32)
+    human_Player = UI_Elements.Checkmark(20, 530, 'Can It Pick Up From Human Player?', 32)
+    ground_Pickup = UI_Elements.Checkmark(20, 570, 'Can It Pick Up From The Ground?', 32)
     
     
-    ending_header = UI_Elements.Header(y=310, title="Endgame", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    defense = UI_Elements.Dropdown(20, 630, 380, 30, [
+                            "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great", "Unknown"], 'Defense', title_size=32)
     
-    Balance = UI_Elements.Checkmark(20, 330, "Did It Park On The Ramp", 32)
-    
-    breakdown = UI_Elements.Checkmark(20, 380, 'Did It Breakdown', 32)
-    
-    defense = UI_Elements.Dropdown(20, 450, 380, 30, [
-                                   "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great", "Unknown"], 'Defense', title_size=32)
-    
-    notes = UI_Elements.TextField(x=20, y=700, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
+    notes = UI_Elements.TextField(x=20, y=900, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
     
     # BEGIN: xz8f5d3g2hj7
     
