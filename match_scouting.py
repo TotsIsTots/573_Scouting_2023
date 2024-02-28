@@ -10,7 +10,7 @@ def main():
     # it is HIGHLY reccomended that these exist, but you can change parameters such as size, position etc.
     global match_number, team_color, team_number
     match_number = UI_Elements.Counter(
-        20, 85, 48, 1, "Match Number", 24)
+        20, 20, 48, 1, "Match Number", 24)
 
     team_color = UI_Elements.TeamColorToggle(175, 90, 'Color', 32, alliance_color)
 
@@ -27,25 +27,30 @@ def main():
     
     
     # Initialize data input objects and headers here, QR code lists data in order of initialization
-    # beginning_header = UI_Elements.Header(y=60, title="Basic Information", size=60, thickness=1, bold=False, color=(206, 50, 209))
-    amt_amplified_scored = UI_Elements.Counter(20, 140, 48, 0, 'Ampelified-Speaker Points: ', 24, 'r')
-    amt_speaker_scored = UI_Elements.Counter(20, 190, 48, 0, 'Non-Ampelified-Speaker Points: ', 24, 'r')
-    amt_AMP_scored = UI_Elements.Counter(20, 240, 48, 0, 'AMP Points: ', 24, 'r')
+    beginning_header = UI_Elements.Header(y=140, title="Auto", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    amt_speaker_scored = UI_Elements.Counter(20, 160, 48, 0, 'Speaker Points: ', 24, 'r')
+    amt_AMP_scored = UI_Elements.Counter(20, 210, 48, 0, 'AMP Points: ', 24, 'r')
     
-    second_header = UI_Elements.Header(y=350, title="Important Stuff", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    _header = UI_Elements.Header(y=320, title="Teleop", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    amt1_speaker_scored = UI_Elements.Counter(20, 340, 48, 0, 'Speaker Points: ', 24, 'r')
+    amt1_AMP_scored = UI_Elements.Counter(20, 390, 48, 0, 'AMP Points: ', 24, 'r')
     
-    CoOp_button = UI_Elements.Checkmark(20, 370, "Did They Hit Coopertition Button?", 32)
-    hang_Chain = UI_Elements.Checkmark(20, 410, "Did It Hang On A Chain?", 32)
-    hang_side_Chain = UI_Elements.Checkmark(20, 450, "Did It Hang On A Side-Chain", 32)
-    breakdown = UI_Elements.Checkmark(20, 490, 'Did It Breakdown?', 32)
-    human_Player = UI_Elements.Checkmark(20, 530, 'Can It Pick Up From Human Player?', 32)
-    ground_Pickup = UI_Elements.Checkmark(20, 570, 'Can It Pick Up From The Ground?', 32)
+    second_header = UI_Elements.Header(y=490, title="Endgame", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    
+    CoOp_button = UI_Elements.Checkmark(20, 500, "Did They Hit Coopertition Button?", 32)
+    hang_Chain = UI_Elements.Checkmark(20, 540, "Did It Hang On A Chain?", 32)
+    hang_side_Chain = UI_Elements.Checkmark(20, 580, "Did They Score Harmony Points?", 32)
+    breakdown = UI_Elements.Checkmark(20, 620, 'Did It Breakdown?', 32)
+    human_Player = UI_Elements.Checkmark(20, 660, 'Can It Pick Up From Human Player?', 32)
+    ground_Pickup = UI_Elements.Checkmark(20, 700, 'Can It Pick Up From The Ground?', 32)
+    mic_Score = UI_Elements.Checkmark(20, 740, 'Did they score on the Mic?', 32)
+    trap_Score = UI_Elements.Checkmark(20, 780, 'Did they score on the Trap?', 32)
     
     
-    defense = UI_Elements.Dropdown(20, 630, 380, 30, [
+    defense = UI_Elements.Dropdown(20, 850, 380, 30, [
                             "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great", "Unknown"], 'Defense', title_size=32)
     
-    notes = UI_Elements.TextField(x=20, y=900, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
+    notes = UI_Elements.TextField(x=20, y=1150, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
     
     # BEGIN: xz8f5d3g2hj7
     
