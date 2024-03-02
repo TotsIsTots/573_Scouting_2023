@@ -21,20 +21,20 @@ def main():
 
     header = UI_Elements.Header(20, "Pit Scouting", 24)
     
-    drivetrain_type = UI_Elements.Dropdown(200, 60, 150, 40, ["Mecanum", "Tank", "omni", "other"], "Drivetrain Type", 24)
-    
-    laps = UI_Elements.Checkmark(30, 280, "Can It Complete A Lap", 32)
-    balls = UI_Elements.Checkmark(30, 330, "Can It Score A Goal", 32)
-    
-    Park = UI_Elements.Checkmark(30, 380, "Can It Park On The Ramp", 32)
+    drivetrain_type = UI_Elements.Dropdown(200, 60, 150, 40, ["Mecanum", "Tank", "Omni", "Swerve", "Other"], "Drivetrain Type", 24)
+    laps = UI_Elements.Checkmark(30, 280, "Can you score on all 3 levels?", 32)
+    balls = UI_Elements.Checkmark(30, 320, "Can you hang on a chain?", 32)
+    hang = UI_Elements.Checkmark(30, 360, "Can you score in the trap?", 32)  
+    floor_intake = UI_Elements.Checkmark(30,400, "Can you intake notes from the floor?", 32)  
+    hp_intake = UI_Elements.Checkmark(30, 440, "Can you intake notes from the floor?", 32)
+    size = UI_Elements.Checkmark(30, 480, "Can you fit under the stage?", 32)    
+    speaker = UI_Elements.Checkmark(30, 520, "Can you score in the speaker?", 32)
+    amp = UI_Elements.Checkmark(30, 560, "Can you score in the amp?", 32)    
 
-    Ramp_Park = UI_Elements.Dropdown(480, 280, 400, 40, ["Can't Park", "Can Park", "Park With Another Robot"], "Charging station", 24)
+    score_method = UI_Elements.TextField(20, 610, 300, 170, 30, title='How many pieces can you score on autonomous', title_size=24)
+    good_aspect = UI_Elements.TextField(600, 600, 300, 170, 30, title='What aspect of the game are you best at?', title_size=24)
     
-   
-    
-    score_method = UI_Elements.TextField(20, 500, 300, 170, 30, title='How does it score?', title_size=24)
-    
-    notes = UI_Elements.TextField(360, 500, 400, 220, 30, title='Comments/Special Elements', title_size=24)
+    notes = UI_Elements.TextField(1100, 600, 400, 220, 30, title='Comments/Special Elements', title_size=24)
 
     #!!!=== All code below this line is for drawing the display, handling inputs, generating QR codes, etc. ===!!!
     #!!!===                 It is not reccomended to change anything below this line.                       ===!!!
