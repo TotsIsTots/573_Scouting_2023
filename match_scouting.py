@@ -12,16 +12,16 @@ def main():
     match_number = UI_Elements.Counter(
         20, 20, 48, 1, "Match Number", 24)
 
-    team_color = UI_Elements.TeamColorToggle(175, 90, 'Color', 32, alliance_color)
+    team_color = UI_Elements.TeamColorToggle(175, 90, 'Team Color', 32, alliance_color)
 
     if matches:
         team_number = UI_Elements.TextField(
-            375, 80, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
+            400, 80, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
         team_number.selected_num = alliance_number - 1
         team_number.opened = False
     else:
         team_number = UI_Elements.TextField(
-            325, 90, 85, 40, 30, title='Team Number', title_size=24)
+            400, 90, 85, 40, 30, title='Team Number', title_size=24)
         
         
     
