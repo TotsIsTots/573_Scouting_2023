@@ -34,23 +34,23 @@ def main():
     _header = UI_Elements.Header(y=320, title="Teleop", size=60, thickness=1, bold=False, color=(150, 150, 150))
     amt1_speaker_scored = UI_Elements.Counter(20, 340, 48, 0, 'Speaker Points: ', 24, 'r')
     amt1_AMP_scored = UI_Elements.Counter(20, 390, 48, 0, 'AMP Points: ', 24, 'r')
+    amt_Amplified_scored = UI_Elements.Counter(20, 440, 48, 0, 'Amplified Speaker Points: ', 24, 'r')
+    second_header = UI_Elements.Header(y=540, title="Endgame", size=60, thickness=1, bold=False, color=(150, 150, 150))
     
-    second_header = UI_Elements.Header(y=490, title="Endgame", size=60, thickness=1, bold=False, color=(150, 150, 150))
-    
-    CoOp_button = UI_Elements.Checkmark(20, 500, "Did They Hit Coopertition Button?", 32)
-    hang_Chain = UI_Elements.Checkmark(20, 540, "Did It Hang On A Chain?", 32)
-    hang_side_Chain = UI_Elements.Checkmark(20, 580, "Did They Score Harmony Points?", 32)
-    breakdown = UI_Elements.Checkmark(20, 620, 'Did It Breakdown?', 32)
-    human_Player = UI_Elements.Checkmark(20, 660, 'Can It Pick Up From Human Player?', 32)
-    ground_Pickup = UI_Elements.Checkmark(20, 700, 'Can It Pick Up From The Ground?', 32)
-    mic_Score = UI_Elements.Checkmark(20, 740, 'Did they score on the Mic?', 32)
-    trap_Score = UI_Elements.Checkmark(20, 780, 'Did they score on the Trap?', 32)
+    CoOp_button = UI_Elements.Checkmark(20, 580, "Did They Hit Coopertition Button?", 32)
+    hang_Chain = UI_Elements.Checkmark(20, 620, "Did It Hang On A Chain?", 32)
+    hang_side_Chain = UI_Elements.Checkmark(20, 660, "Did They Score Harmony Points?", 32)
+    breakdown = UI_Elements.Checkmark(20, 700, 'Did It Breakdown?', 32)
+    human_Player = UI_Elements.Checkmark(20, 740, 'Can It Pick Up From Human Player?', 32)
+    ground_Pickup = UI_Elements.Checkmark(20, 780, 'Can It Pick Up From The Ground?', 32)
+    mic_Score = UI_Elements.Checkmark(20, 820, 'Did they score on the Mic?', 32)
+    trap_Score = UI_Elements.Checkmark(20, 860, 'Did they score on the Trap?', 32)
     
     
-    defense = UI_Elements.Dropdown(20, 850, 380, 30, [
+    defense = UI_Elements.Dropdown(20, 940, 380, 30, [
                             "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great", "Unknown"], 'Defense', title_size=32)
     
-    notes = UI_Elements.TextField(x=20, y=1150, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
+    notes = UI_Elements.TextField(x=20, y=1200, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
     
     # BEGIN: xz8f5d3g2hj7
     
