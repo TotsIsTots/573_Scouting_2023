@@ -97,7 +97,7 @@ def main():
 
         if matches and match_number.value > 0 and match_number.value <= len(matches):
             team_number.options = matches[match_number.value -
-                                          1][team_color.value]
+                                            1][team_color.value]
             team_number.option_renders = []
             for number in team_number.options:
                 team_number.option_renders.append(team_number.font.render(number, 1, team_number.font_color))
