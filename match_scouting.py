@@ -46,7 +46,6 @@ def main():
     breakdown = UI_Elements.Checkmark(20, Twoheaderypos+160, 'Did It Breakdown?', 32)
     human_Player = UI_Elements.Checkmark(20, Twoheaderypos+200, 'Can It Pick Up From Human Player?', 32)
     ground_Pickup = UI_Elements.Checkmark(20, Twoheaderypos+240, 'Can It Pick Up From The Ground?', 32)
-    mic_Score = UI_Elements.Checkmark(20, Twoheaderypos+280, 'Did they score on the Mic?', 32)
     amplify_Score = UI_Elements.Checkmark(20, Twoheaderypos+320, 'Did they amplify during the match?', 32)
     trap_Score = UI_Elements.Checkmark(20, Twoheaderypos+360, 'Did they score on the Trap?', 32)
     park = UI_Elements.Checkmark(20, Twoheaderypos+400, 'Did they park?', 32)
