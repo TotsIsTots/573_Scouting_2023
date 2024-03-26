@@ -2,7 +2,7 @@ from support import QR, Scrolling, UI_Elements
 import pygame as pg
 import math
 from datetime import date
-import os
+import os+
 import configparser
 
 
@@ -26,7 +26,6 @@ def main():
     balls = UI_Elements.Checkmark(30, 320, "Can you hang on a chain?", 32)
     hang = UI_Elements.Checkmark(30, 360, "Can you score in the trap?", 32)  
     floor_intake = UI_Elements.Checkmark(30,400, "Can you intake notes from the floor?", 32)  
-    hp_intake = UI_Elements.Checkmark(30, 440, "Can you intake notes from the floor?", 32)
     size = UI_Elements.Checkmark(30, 480, "Can you fit under the stage?", 32)    
     speaker = UI_Elements.Checkmark(30, 520, "Can you score in the speaker?", 32)
     amp = UI_Elements.Checkmark(30, 560, "Can you score in the amp?", 32)    
