@@ -15,22 +15,22 @@ def main():
     match_number = UI_Elements.Counter(
         20, 30, 48, 1, "Match Number", 24)
     
-    team_color = UI_Elements.TeamColorToggle(175, 100, 'Team Color', 32, alliance_color)
+    team_color = UI_Elements.TeamColorToggle(175, 30, 'Team Color', 32, alliance_color)
 
     if matches:
         team_number = UI_Elements.TextField(
-            400, 100, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
+            400, 30, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
         team_number.selected_num = alliance_number - 1
         team_number.opened = False
     else:
         team_number = UI_Elements.TextField(
-            400, 100, 85, 40, 30, title='Team Number', title_size=24)
+            400, 30, 85, 40, 30, title='Team Number', title_size=24)
         
         
     
     
     # Initialize data input objects and headers here, QR code lists data in order of initialization
-    beginning_header = UI_Elements.Header(y=140, title="Auton", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    beginning_header = UI_Elements.Header(y=140, title="Auton (First 15 seconds of match)", size=60, thickness=1, bold=False, color=(150, 150, 150))
     speaker_auton = UI_Elements.Counter(10, 180, 48, 0, "Speaker Notes:", 24)
     amp_auton = UI_Elements.Counter(10, 260, 48, 0, "AMP Notes:", 24)
     Leave = UI_Elements.Checkmark(20, 320, 'Did Robot Leave?', 32, 'l')
@@ -46,8 +46,6 @@ def main():
     ground_pick = UI_Elements.Checkmark(10, 860, 'Can Robot pick up notes from Ground?', 32, 'l')
     trap_score = UI_Elements.Checkmark(10, 900, 'Can Robot score in the trap?', 32, 'l')
     notes = UI_Elements.TextField(x=800, y=760, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
-    
-    
     
 
 
