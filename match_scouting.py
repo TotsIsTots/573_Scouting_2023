@@ -6,52 +6,51 @@ import os
 import configparser
 
 
+field_image = pg.image.load('Assets/FieldDiagram.png')
+field_image = pg.transform.scale(field_image, (400, 400))
+
 def main():
     # it is HIGHLY reccomended that these exist, but you can change parameters such as size, position etc.
     global match_number, team_color, team_number
     match_number = UI_Elements.Counter(
-        20, 20, 48, 1, "Match Number", 24)
-
-    team_color = UI_Elements.TeamColorToggle(175, 90, 'Team Color', 32, alliance_color)
+        20, 30, 48, 1, "Match Number", 24)
+    
+    team_color = UI_Elements.TeamColorToggle(175, 100, 'Team Color', 32, alliance_color)
 
     if matches:
         team_number = UI_Elements.TextField(
-            400, 80, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
+            400, 100, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
         team_number.selected_num = alliance_number - 1
         team_number.opened = False
     else:
         team_number = UI_Elements.TextField(
-            400, 90, 85, 40, 30, title='Team Number', title_size=24)
+            400, 100, 85, 40, 30, title='Team Number', title_size=24)
         
         
     
     
     # Initialize data input objects and headers here, QR code lists data in order of initialization
-    beginning_header = UI_Elements.Header(y=140, title="Auto", size=60, thickness=1, bold=False, color=(150, 150, 150))
-    amt_speaker_scored = UI_Elements.Counter(20, 160, 48, 0, 'Speaker Points: ', 24, 'r')
-    amt_AMP_scored = UI_Elements.Counter(20, 210, 48, 0, 'AMP Points: ', 24, 'r')
-    
-    _header = UI_Elements.Header(y=320, title="Teleop", size=60, thickness=1, bold=False, color=(150, 150, 150))
-    amt1_speaker_scored = UI_Elements.Counter(20, 340, 48, 0, 'Speaker Points: ', 24, 'r')
-    amt1_AMP_scored = UI_Elements.Counter(20, 390, 48, 0, 'AMP Points: ', 24, 'r')
-    amt_Amplified_scored = UI_Elements.Counter(20, 440, 48, 0, 'Amplified Speaker Points: ', 24, 'r')
-    second_header = UI_Elements.Header(y=540, title="Endgame", size=60, thickness=1, bold=False, color=(150, 150, 150))
-    
-    CoOp_button = UI_Elements.Checkmark(20, 580, "Did They Hit Coopertition Button?", 32)
-    hang_Chain = UI_Elements.Checkmark(20, 620, "Did It Hang On A Chain?", 32)
-    hang_side_Chain = UI_Elements.Checkmark(20, 660, "Did They Score Harmony Points?", 32)
-    breakdown = UI_Elements.Checkmark(20, 700, 'Did It Breakdown?', 32)
-    human_Player = UI_Elements.Checkmark(20, 740, 'Can It Pick Up From Human Player?', 32)
-    ground_Pickup = UI_Elements.Checkmark(20, 780, 'Can It Pick Up From The Ground?', 32)
-    mic_Score = UI_Elements.Checkmark(20, 820, 'Did they score on the Mic?', 32)
-    trap_Score = UI_Elements.Checkmark(20, 860, 'Did they score on the Trap?', 32)
+    beginning_header = UI_Elements.Header(y=140, title="Auton", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    speaker_auton = UI_Elements.Counter(10, 180, 48, 0, "Speaker Notes:", 24)
+    amp_auton = UI_Elements.Counter(10, 260, 48, 0, "AMP Notes:", 24)
+    Leave = UI_Elements.Checkmark(20, 320, 'Did Robot Leave?', 32, 'l')
+    next_header = UI_Elements.Header(y=420, title="Teleop", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    speaker_teleop = UI_Elements.Counter(10, 460, 48, 0, "Speaker Notes:", 24)
+    amp_teleop = UI_Elements.Counter(10, 540, 48, 0, "AMP Notes:", 24)
+    amplified_teleop = UI_Elements.Counter(10, 620, 48, 0, "Amplified Speaker Notes:", 24)
+    end_header = UI_Elements.Header(y=730, title="Endgame", size=60, thickness=1, bold=False, color=(150, 150, 150))
+    hang_chain = UI_Elements.Checkmark(10, 740, 'Did Robot Hang On The Chain?', 32, 'l')
+    score_harmony = UI_Elements.Checkmark(10, 780, 'Did Robot hang on a chain with other Robot?', 32, 'l')
+    hang_chain = UI_Elements.Checkmark(10, 740, 'Did Robot Hang On The Chain?', 32, 'l')
+    human_pick = UI_Elements.Checkmark(10, 820, 'Can Robot pick up notes from Human Player?', 32, 'l')
+    ground_pick = UI_Elements.Checkmark(10, 860, 'Can Robot pick up notes from Ground?', 32, 'l')
+    trap_score = UI_Elements.Checkmark(10, 900, 'Can Robot score in the trap?', 32, 'l')
+    notes = UI_Elements.TextField(x=800, y=760, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
     
     
-    defense = UI_Elements.Dropdown(20, 940, 380, 30, [
-                            "Didn't Play", "Played Poorly", "Played Okay", "Played Good", "Played Great", "Unknown"], 'Defense', title_size=32)
     
-    notes = UI_Elements.TextField(x=20, y=1200, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
-    
+
+
     # BEGIN: xz8f5d3g2hj7
     
     # END: xz8f5d3g2hj7
@@ -159,7 +158,7 @@ pg.display.set_icon(icon)
 BACKGROUND = pg.image.load(background_path)
 BACKGROUND_W, BACKGROUND_H = BACKGROUND.get_size()
 
-action_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", action_buttons_size)
+action_font = pg.font.Font("Assets\LDFArial.ttf", action_buttons_size)
 generate_render = action_font.render('Generate', 1, generate_text_color)
 generate_rect = pg.Rect(
     action_buttons_pos[0], action_buttons_pos[1], generate_render.get_width() * 1.1, action_buttons_size)
@@ -250,6 +249,7 @@ def drawBackground(screen_w, screen_h):
 def drawDisplay(screen_w, screen_h, show_next):
     drawBackground(screen_w, screen_h)
     
+    WIN.blit(field_image, (900, 140-Scrolling.scroll_off))
     for image in UI_Elements.ImageArray.imageArrayList:
         image.draw()
     for counter in UI_Elements.Counter.counter_list:
