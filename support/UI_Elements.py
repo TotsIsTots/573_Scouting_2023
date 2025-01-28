@@ -35,7 +35,7 @@ class Header:
         self.thickness = thickness
         self.size = size
         self.title = title
-        self.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", size)
+        self.title_font = pg.font.Font("Assets\LDFArial.ttf", size)
         self.title_font.set_bold(bold)
         self.title_render = self.title_font.render(title, 1, color)
         self.color = color
@@ -65,7 +65,7 @@ class Counter:
         # defines title values
         self.title = title
         if title != "":
-            self.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", title_size)
+            self.title_font = pg.font.Font("Assets\LDFArial.ttf", title_size)
             self.title_font_color = (180, 180, 180)
             self.title_render = self.title_font.render(
                 str(title), 1, self.title_font_color)
@@ -77,7 +77,7 @@ class Counter:
                     self.title_render.get_width(), y
 
         # defines counter values
-        self.font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", size)
+        self.font = pg.font.Font("Assets\LDFArial.ttf", size)
         self.font_color = (180, 180, 180)
         self.value = value
         self.value_render = self.font.render(str(value), 1, self.font_color)
@@ -175,7 +175,7 @@ class Dropdown:
 
         # define font and renders
         self.font = pg.font.Font(
-            "Assets\Ldfcomicsans-jj7l.ttf", height - (self.border_thickness * 2))
+            "Assets\LDFArial.ttf", height - (self.border_thickness * 2))
         self.font_color = (180, 180, 180)
         self.option_renders = []
         for option in options:
@@ -190,7 +190,7 @@ class Dropdown:
         self.title = title
         self.title_size = title_size
         self.title_color = (180, 180, 180)
-        self.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf")
+        self.title_font = pg.font.Font("Assets\LDFArial.ttf")
         self.title_render = self.title_font.render(title, 1, self.title_color)
 
         Dropdown.dropdown_list.append(self)
@@ -286,7 +286,7 @@ class Checkmark:
         # defines title values
         self.title = title
         self.title_color = (180, 180, 180)
-        self.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", size)
+        self.title_font = pg.font.Font("Assets\LDFArial.ttf", size)
         self.title_render = self.title_font.render(title, 1, self.title_color)
 
         # calculates checkbox placement
@@ -342,7 +342,7 @@ class Checkmark:
 
     def update():
         for c in Checkmark.checkmark_list:
-            c.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", size=c.size)
+            c.title_font = pg.font.Font("Assets\LDFArial.ttf", size=c.size)
             # c.title_render = c.title_font.render(c.title, 1, c.title_color)
             c.box.thickness = c.box_thickness
             # c.check = pg.transform.smoothscale(
@@ -399,7 +399,7 @@ class TextField:
         if title != '':
             self.title_size = title_size
             self.title_color = (180, 180, 180)
-            self.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", title_size)
+            self.title_font = pg.font.Font("Assets\LDFArial.ttf", title_size)
             self.title_render = self.title_font.render(
                 str(title), 1, self.title_color)
             self.title_x, self.title_y = x, y - (title_size * 1.1)
@@ -407,7 +407,7 @@ class TextField:
         # define text field font and lists
         self.text_size = text_size
         self.font_color = (180, 180, 180)
-        self.font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", text_size)
+        self.font = pg.font.Font("Assets\LDFArial.ttf", text_size)
         self.font_height = self.font.render(
             '', 0, (0, 0, 0), (0, 0, 0)).get_height()
         self.renders = []
@@ -611,7 +611,7 @@ class TeamColorToggle:
         # defines title values
         self.title = title
         self.title_color = (180, 180, 180)
-        self.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", size)
+        self.title_font = pg.font.Font("Assets\LDFArial.ttf", size)
         self.title_render = self.title_font.render(title, 1, self.title_color)
 
         # calculates checkbox placement
@@ -713,7 +713,7 @@ class ImageArray:
         if title != '':
             self.title_size = title_size
             self.title_color = (180, 180, 180)
-            self.title_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", title_size)
+            self.title_font = pg.font.Font("Assets\LDFArial.ttf", title_size)
             self.title_render = self.title_font.render(
                 title, 1, self.title_color)
             self.title_x, self.title_y = x, y - (title_size * 1.1)

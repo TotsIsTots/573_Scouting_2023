@@ -6,22 +6,25 @@ import os
 import configparser
 
 
+field_image = pg.image.load('Assets/FieldDiagram.png')
+field_image = pg.transform.scale(field_image, (400, 400))
+
 def main():
     # it is HIGHLY reccomended that these exist, but you can change parameters such as size, position etc.
     global match_number, team_color, team_number
     match_number = UI_Elements.Counter(
-        20, 20, 48, 1, "Match Number", 24)
-
-    team_color = UI_Elements.TeamColorToggle(175, 90, 'Team Color', 32, alliance_color)
+        20, 30, 48, 1, "Match Number", 24)
+    
+    team_color = UI_Elements.TeamColorToggle(175, 30, 'Team Color', 32, alliance_color)
 
     if matches:
         team_number = UI_Elements.TextField(
-            400, 80, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
+            400, 30, 100, 40, matches[match_number.value - 1][alliance_color], "Team number", 24)
         team_number.selected_num = alliance_number - 1
         team_number.opened = False
     else:
         team_number = UI_Elements.TextField(
-            400, 90, 85, 40, 30, title='Team Number', title_size=24)
+            400, 30, 85, 40, 30, title='Team Number', title_size=24)
         
         
     
@@ -56,6 +59,8 @@ def main():
     
     notes = UI_Elements.TextField(x=20, y=Twoheaderypos+480, width=400, height=100, text_size=20, border_thickness=5, title='Notes', title_size=20)
     
+
+
     # BEGIN: xz8f5d3g2hj7
     
     # END: xz8f5d3g2hj7
@@ -163,7 +168,7 @@ pg.display.set_icon(icon)
 BACKGROUND = pg.image.load(background_path)
 BACKGROUND_W, BACKGROUND_H = BACKGROUND.get_size()
 
-action_font = pg.font.Font("Assets\Ldfcomicsans-jj7l.ttf", action_buttons_size)
+action_font = pg.font.Font("Assets\LDFArial.ttf", action_buttons_size)
 generate_render = action_font.render('Generate', 1, generate_text_color)
 generate_rect = pg.Rect(
     action_buttons_pos[0], action_buttons_pos[1], generate_render.get_width() * 1.1, action_buttons_size)
@@ -254,6 +259,7 @@ def drawBackground(screen_w, screen_h):
 def drawDisplay(screen_w, screen_h, show_next):
     drawBackground(screen_w, screen_h)
     
+    WIN.blit(field_image, (900, 140-Scrolling.scroll_off))
     for image in UI_Elements.ImageArray.imageArrayList:
         image.draw()
     for counter in UI_Elements.Counter.counter_list:
